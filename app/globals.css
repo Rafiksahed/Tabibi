@@ -1,3 +1,9 @@
+:root{
+  --main-color: #04326B;
+  --second-color: #087CA7;
+  --third-color: #DAF5FF;
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -9,4 +15,8 @@ body {
 }
 a {
   text-decoration: none;
+}
+
+li{
+  list-style: none;
 }

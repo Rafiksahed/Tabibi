@@ -1,0 +1,14 @@
+.footer{
+    background-color: var(--main-color);
+    height: 30vh;
+    text-align: center;
+    padding: 5%;
+    padding-top: 1%;
+    color: var(--third-color);
+    line-height: 2rem;
+}
+.footer ul{
+    display: flex;
+    gap: 10px;
+    margin-top: 3%;
+}

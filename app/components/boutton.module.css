@@ -1,0 +1,11 @@
+.btn{
+    all: unset;
+    background-color: var(--main-color);
+    color: #fff;
+    padding: 3% 7%;
+    border-radius: 15px;
+}
+
+.btn:hover{
+    background-color: #084691;
+}
