@@ -40,7 +40,7 @@ export default function Home() {
           </div>
           <div>
             <h2>Vous etes <br/>medecin ?</h2>
-            <p>Vous voulez rejoindre l'aventure ? <br />Enregistrer vous pour commencer</p>
+            <p>Vous voulez rejoindre l aventure ? <br />Enregistrer vous pour commencer</p>
             <Boutton />
           </div>
        </div>
@@ -74,7 +74,7 @@ export default function Home() {
             width={70}
             className={styles.img}
             />
-            <p><b>Recevez </b>des messages de sensibilisation pour prévenir l'apparition de maladies.</p>
+            <p><b>Recevez </b>des messages de sensibilisation pour prévenir l apparition de maladies.</p>
           </div>
           <div className={styles.box2}>
             <Image 
@@ -96,7 +96,7 @@ export default function Home() {
             width={70}
             className={styles.img}
             />
-            <p><b>Profitez d'un accès rapide et facile</b> à une communauté étendue de 
+            <p><b>Profitez d nun accès rapide et facile</b> à une communauté étendue de 
             professionnels de la santé.</p>
           </div>
          </div>

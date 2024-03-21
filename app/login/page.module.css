@@ -1,0 +1,263 @@
+
+/* this is for patient */
+
+.patientmain{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    overflow: hidden;
+}
+.patientmain .bienvenue{
+    width: 35%;
+    height: 100vh;
+    background-color: #022550;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: 0.5s;
+}
+.patientmain .bienvenue div{
+    color: #fff;
+    width: 80%;
+    position: relative;
+}
+.patientmain .bienvenue div *{
+    padding: 3vh;
+}
+.patientmain .bienvenue button{
+    padding: 4vh 8vh 4vh 8vh;
+    margin-top: 4vh;
+    border-radius: 4vh;
+    border: 0.3vh solid #fff;
+    background-color: #022550;
+    color: #fff;
+    cursor: pointer;
+    font-weight: bolder;
+    transition: 0.3s;
+}
+.patientmain .bienvenue button:hover{
+    transform: scale(1.1);
+    background-color: #fff;
+    color: #022550;
+}
+.patientmain .myloginpage{
+    width: 65%;
+}
+/* this cause the icon erreur */
+
+.patientmain .myloginpage *{
+    margin-top: 2vh;
+}
+/*-----------------*/
+.patientmain .myloginpage label{
+    position: relative;
+    left: 30px;
+    top: 3px;
+}
+.patientmain .myloginpage input{
+    width: 30%;
+    height: 2vh;
+    padding: 3vh 3vh 3vh 8vh;
+    background-color: #e6e6e6;
+    border: none;
+    transition: 0.3s;
+}
+.patientmain .myloginpage input:focus{
+    box-shadow: 0 0 0.6vh #262626;
+    border: none;
+    outline: none;
+}
+.patientmain .myloginpage button{
+    padding: 2vh 8vh 2vh 8vh;
+    margin-top: 4vh;
+    border-radius: 4vh;
+    border: none;
+    background-color: #022550;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.patientmain .myloginpage button:hover{
+    box-shadow: 0 0 0.6vh #262626;
+}
+.patientmain .myloginpage a{
+    color: #087CA7;
+    text-decoration: none;
+}
+.patientmain .myloginpage h1{
+    color: #022550;
+}
+
+
+/* this is for medecinmain */
+
+
+.medecinmain{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    margin-top: -100vh;
+    transform: translateX(100%);
+}
+.medecinmain .bienvenue{
+    width: 35%;
+    height: 100vh;
+    background-color: #022550;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: 0.5s;
+}
+.medecinmain .bienvenue div{
+    color: #fff;
+    width: 80%;
+    position: relative;
+}
+.medecinmain .bienvenue div *{
+    padding: 3vh;
+}
+.medecinmain .bienvenue button{
+    padding: 4vh 8vh 4vh 8vh;
+    margin-top: 4vh;
+    border-radius: 4vh;
+    border: 0.3vh solid #fff;
+    background-color: #022550;
+    color: #fff;
+    cursor: pointer;
+    font-weight: bolder;
+    transition: 0.3s;
+}
+.medecinmain .bienvenue button:hover{
+    transform: scale(1.1);
+    background-color: #fff;
+    color: #022550;
+}
+.medecinmain .myloginpage{
+    width: 65%;
+    position: relative;
+    transition: 0.5s;
+}
+/* this cause the icon erreur */
+
+.medecinmain .myloginpage *{
+    margin-top: 2vh;
+}
+/*-----------------*/
+.medecinmain .myloginpage label{
+    position: relative;
+    left: 30px;
+    top: 3px;
+}
+.medecinmain .myloginpage input{
+    width: 30%;
+    height: 2vh;
+    padding: 3vh 3vh 3vh 8vh;
+    background-color: #e6e6e6;
+    border: none;
+    transition: 0.3s;
+}
+.medecinmain .myloginpage input:focus{
+    box-shadow: 0 0 0.6vh #022550;
+    border: none;
+    outline: none;
+}
+.medecinmain .myloginpage button{
+    padding: 2vh 8vh 2vh 8vh;
+    margin-top: 4vh;
+    border-radius: 4vh;
+    border: none;
+    background-color: #022550;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.medecinmain .myloginpage button:hover{
+    box-shadow: 0 0 0.6vh #262626;
+}
+.medecinmain .myloginpage a{
+    color: #087CA7;
+    text-decoration: none;
+}
+.medecinmain .myloginpage h1{
+    color: #022550;
+}
+
+
+.medecinmain .specialitepage{
+    width: 65%;
+    height: 60%;
+    margin-top: 5vh;
+    position: absolute;
+    top: 100%;
+    transition: 0.5s;
+}
+.medecinmain .specialite{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.medecinmain .specialite .card{
+    width: 30%;
+    height: 10vh;
+    background-color: #e6e6e6;
+    margin: 2vh;
+    line-height: 8vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: 0.3vh solid #252525;
+    transition: 0.3s;
+}
+
+.medecinmain .specialite button:hover{
+    box-shadow: 0 0 0.6vh #262626;
+}
+.medecinmain .specialite .card:focus{
+    background-color: #022550;
+    color: #fff;
+}
+
+.medecinmain .specialite .connect{
+    padding: 2vh 8vh 2vh 8vh;
+    margin-top: 4vh;
+    border-radius: 4vh;
+    border: none;
+    background-color: #022550;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.medecinmain .specialite .connect{
+    background-color: #022550;
+}
+.medecinmain .specialite .return{
+    padding: 2vh 3vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 1vh;
+    left: 50px;
+    border-radius: 3vh;
+    border: none;
+    color: #171717;
+    font-size: larger;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.medecinmain .specialite .return:hover{
+    background-color: #e41212;
+    color: #fff;
+}
+.medecinmain .specialite .card:hover{
+    box-shadow: 0 0 0.6vh #262626;
+}
+
+.oublier{
+    cursor: pointer;
+    color: #022550;
+}

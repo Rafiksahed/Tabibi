@@ -5,7 +5,7 @@
     padding: 5%;
     padding-top: 1%;
     color: var(--third-color);
-    line-height: 2rem;
+    line-height: 4vh;
 }
 .footer ul{
     display: flex;
