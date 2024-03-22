@@ -2,11 +2,13 @@ import Image from 'next/image'
 import styles from './page.module.css'
 import Boutton from './components/boutton'
 import BouttonP from "./components/bouttonP"
+import Nav from './components/nav'
 
 export default function Home() {
   
   return (
     <div className={styles.main}>
+      <Nav />
        <div className={styles.accueil}>
          <div className={styles.search}>
            <h1>Prenez un <br/> rendez vous</h1>

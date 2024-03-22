@@ -4,6 +4,8 @@
     color: #fff;
     padding: 3% 7%;
     border-radius: 15px;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
 .btn:hover{

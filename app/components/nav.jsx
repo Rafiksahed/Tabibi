@@ -14,7 +14,7 @@ const Nav = () => {
             <li className={styles.Link}><Link  href="#">Services</Link></li>
             <li className={styles.Link} id={styles.ligne}><Link  href="#">Specialité</Link></li>
             <li className={styles.Link} ><Link  href="#">Nous Contacter</Link></li>
-            <li className={styles.Link}><Link  href="#"><button>Login</button></Link></li>
+            <li className={styles.button}><Link  href="#"><button>Login</button></Link></li>
         </ul>
     </div>
   )

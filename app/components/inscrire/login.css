@@ -1,15 +1,10 @@
 
-
-.login-page{
-    overflow-y: hidden;
-  }
 /* this is for patient */
 
 .patientmain{
     width: 100%;
     height: 100vh;
     display: flex;
-    overflow: hidden;
 }
 .patientmain .bienvenue{
     width: 35%;
@@ -47,7 +42,6 @@
 }
 .patientmain .myloginpage{
     width: 65%;
-    margin-top: 5vh;
 }
 /* this cause the icon erreur */
 
@@ -143,7 +137,6 @@
     width: 65%;
     position: relative;
     transition: 0.5s;
-    margin-top: 5vh;
 }
 /* this cause the icon erreur */
 
@@ -204,7 +197,6 @@
     flex-wrap: wrap;
     justify-content: space-around;
 }
-
 .medecinmain .specialite .card{
     width: 30%;
     height: 10vh;
@@ -262,9 +254,3 @@
 .medecinmain .specialite .card:hover{
     box-shadow: 0 0 0.6vh #262626;
 }
-
-.oublier{
-    cursor: pointer;
-    color: #022550;
-}
-

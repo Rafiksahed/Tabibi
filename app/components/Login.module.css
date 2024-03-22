@@ -47,7 +47,6 @@
 }
 .patientmain .myloginpage{
     width: 65%;
-    margin-top: 5vh;
 }
 /* this cause the icon erreur */
 
@@ -143,7 +142,6 @@
     width: 65%;
     position: relative;
     transition: 0.5s;
-    margin-top: 5vh;
 }
 /* this cause the icon erreur */
 
@@ -267,4 +265,3 @@
     cursor: pointer;
     color: #022550;
 }
-

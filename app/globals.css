@@ -13,10 +13,16 @@ html,
 body {
   height: auto;
 }
+.login-page{
+  overflow-y: hidden;
+}
 a {
   text-decoration: none;
 }
 
 li{
   list-style: none;
+}
+.main{
+  overflow: scroll;
 }

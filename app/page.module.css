@@ -1,11 +1,12 @@
 
                      /*ACCUEIL*/
 .accueil{
-    height: 50vh;
+    height: 65vh;
     display: flex;
     justify-content: space-between;
     background-color: var(--main-color);
     position: relative;
+    background-color: #022550;
 }
 
 .search h1{
