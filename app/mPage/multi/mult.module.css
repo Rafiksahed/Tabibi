@@ -1,0 +1,17 @@
+.mult{
+    margin-left: 5vw;
+    width: 40vw;
+    margin-top: 15vh;
+    margin-right: 3vw;
+}
+
+
+.list{
+    display: flex;
+    justify-content: space-between;
+    color: var(--main-color);
+}
+.selected {
+    border-bottom: 3px solid var(--second-color); /* Bordure basse pour l'onglet sélectionné */
+}
+

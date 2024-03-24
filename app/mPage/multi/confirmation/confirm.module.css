@@ -1,0 +1,63 @@
+.main{
+    margin-top: 5vh;
+
+    height: 40vh;
+}
+
+.list{
+    overflow-y: scroll;
+}
+.list::-webkit-scrollbar {
+    width: 12px;
+}
+.list::-webkit-scrollbar-thumb {
+    background-color: var(--main-color);
+    border-radius: 6px; 
+}
+
+
+.list::-webkit-scrollbar-track {
+    background-color: var(--third-color); 
+    border-radius: 6px; 
+}
+
+.element{
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    margin-bottom: 2vh;
+    padding-bottom: 2%;
+    border-bottom: solid 1px var(--third-color);
+}
+
+.ctn{
+    margin-right: 40%;
+    color: var(--main-color);
+}
+
+.confirm , .decline{
+    width: 15%;
+    height: 3vh;
+    margin-right: 4%;
+    border: none;
+    border-radius: 15px;
+}
+.confirm{
+    background-color: var(--second-color);
+    color: white;
+}
+.confirm:hover{
+    background-color: #14a7dd;
+}
+
+.decline{
+    background-color: rgb(146, 147, 158);
+    color: white;
+}
+.decline:hover{
+  background-color: rgb(232, 57, 57);
+}
+.h{
+    color: rgb(2, 18, 87);
+}
+

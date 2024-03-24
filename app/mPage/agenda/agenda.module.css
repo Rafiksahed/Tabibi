@@ -1,0 +1,55 @@
+.agenda{
+    margin-left: 3.5vw;
+    margin-top: 2%;
+
+}
+
+.h{
+    color: var(--main-color);
+    margin-bottom: 2vh;
+}
+
+.table{
+    margin: 1% 2%;
+    width: 90%;
+    border-spacing: 4px 0;
+}
+.thead{
+   padding-bottom: 1%;
+   color: var(--main-color);
+}
+
+.row, .col{
+    padding: 1.3%;
+    
+
+}
+.row{
+    width: 10%;
+    padding: 2%;
+}
+.tableB{
+    background-color: rgba(103, 141, 246, 0.105);
+}
+.ctn{
+    background-color: rgba(103, 141, 246, 0.167);
+    width: 15%;
+}
+.specialDay {
+    color: var(--second-color);
+}
+.prevButton{
+    margin-right: 80%;
+}
+.nextButton, .prevButton{
+    background-color: var(--main-color);
+    border: none;
+    color: white;
+    padding: 0.5%;
+    border-radius: 10px;
+}
+.cellFilled{
+    background-color: var(--main-color);
+    color: white;
+    padding: 1%;
+}
