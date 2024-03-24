@@ -15,10 +15,10 @@ function Mult() {
     <div className={styles.mult}>
       <ul className={styles.list}>
         <li className={`${styles.tab} ${selectedTab === 'confirmation' ? styles.selected : ''}`} onClick={() => handleTabChange('confirmation')}>
-          <h2>Confirmation de Rendez-vous</h2>
+          <button>Confirmation de Rendez-vous</button>
         </li>
         <li className={`${styles.tab} ${selectedTab === 'message' ? styles.selected : ''}`} onClick={() => handleTabChange('message')}>
-          <h2>Messagerie</h2>
+          <button>Messagerie</button>
         </li>
       </ul>
       <div>

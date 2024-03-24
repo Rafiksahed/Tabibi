@@ -52,7 +52,7 @@ function Agenda() {
   return (
     <div className={styles.agenda}> 
       <h1 className={styles.h}>Agenda</h1>  
-      <div>
+      <div className={styles.button}>
         <button className={styles.prevButton} onClick={prevWeek}>Semaine précédente</button>
         <button className={styles.nextButton} onClick={nextWeek}>Semaine suivante</button>
       </div>

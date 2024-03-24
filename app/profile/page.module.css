@@ -1,0 +1,87 @@
+.all{
+    width: 90%;
+    height: 80vh;
+    position: absolute;
+    left: 50%;
+    top: 10vh;
+    padding: 2vh;
+    transform: translateX(-50%);
+    background-color: #f1f1f1;
+    display: flex;
+    border-radius: 3vh;
+    padding: 2vh;
+}
+.des{
+    border-right: 0.3vh solid #252525;
+    width: 50vh;
+    position: relative;
+}
+.image{
+    width: 20vh;
+    height: 20vh;
+    border-radius: 50%;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.image img{
+    width: 20vh;
+    height: 20vh;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+}
+.info{
+    margin-left: 20vh;
+    width: 100%;
+    height: 90vh;
+    padding: 3vh;
+}
+.patientInfo{
+    margin-top: 3vh;
+    line-height: 5vh;
+    width: 65%;
+    display: flex;
+    justify-content: space-between;
+}
+.patientInfo ul li{
+    list-style: none;
+    font-weight: lighter;
+    line-height: 7vh;
+}
+.patientInfo ul li li{
+    font-weight: bold;
+    margin-top: -2vh;
+}
+.des ul li{
+    font-weight: bold;
+    list-style: none;
+    margin-top: 3vh;
+}
+.des ul li button{
+    padding: 1vh;
+    text-decoration: none;
+    color: #252525;
+    width: 100%;
+    border-radius: 3vh;
+    transition: 0.3s;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+.des ul li button:not(.logout):hover{
+    color: #e6e6e6;
+    background-color: #022550;
+}
+.des ul li .logout{
+    color: #ff0000a8;
+    transition: 0.3s;
+}
+.des ul li .logout:hover{
+    color: red;
+}
+
+.image #one{
+    background-color: #022550;
+    color: #e6e6e6;
+}

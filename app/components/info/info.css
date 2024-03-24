@@ -1,0 +1,190 @@
+.all{
+    width: 60%;
+    height: auto;
+    position: absolute;
+    top: 20vh;
+    right: 10%;
+    padding: 2vh;
+    display: flex;
+    border: #252525 solid 0.2vh;
+    background-color: #fff;
+}
+.message{
+    position: absolute;
+    right: 0%;
+    margin: 0 2vh;
+    text-decoration: none;
+    color: #fff;
+    background-color: #022550;
+    padding: 2vh;
+    transition: 0.3s;
+}
+.message:hover{
+    background-color: #fff;
+    border: #022550 solid 0.3vh;
+    color: #022550;
+}
+/* For Webkit browsers */
+::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+  
+.des{
+    border-right: 0.3vh solid #252525;
+    width: 50vh;
+    height: auto;
+    position: absolute;
+    top: 20vh;
+    left: 4%;
+    border: #252525 solid 0.2vh;
+    background-color: #fff;
+}
+.des ul{
+  margin-top: 2vh;
+}
+.des ul li{
+  font-weight: bold;
+  list-style: none;
+}
+.des ul li button{
+  padding: 2.5vh;
+  text-align: left;
+  text-decoration: none;
+  color: #252525;
+  width: 100%;
+  transition: 0.3s;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: #fff;
+}
+.des ul li button:not(.logout):hover{
+  color: #f1f1f1;
+  background-color: #022550;
+}
+.des ul li .logout{
+  color: #ff0000a8;
+  transition: 0.3s;
+}
+.des ul li .logout:hover{
+  color: red;
+}
+
+
+.image{
+    width: 20vh;
+    height: 20vh;
+    border-radius: 50%;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.names{
+    text-align: center;
+}
+.image img{
+    width: 20vh;
+    height: 20vh;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+}
+.info{
+    margin-left: 20vh;
+    width: 100%;
+    height: auto;
+    padding: 3vh;
+}
+.patientInfo{
+    margin-top: 3vh;
+    line-height: 5vh;
+    width: 65%;
+    display: flex;
+    justify-content: space-between;
+}
+.patientInfo ul li{
+    list-style: none;
+    line-height: 7vh;
+}
+.patientInfo ul li li{
+    font-weight: bold;
+    margin-top: -2vh;
+}
+
+.des #one{
+    background-color: #022550;
+    color: #e6e6e6;
+}
+
+
+
+
+/* favorite */
+.fav{
+    width: 90%;
+    margin-left: -8vh;
+    margin-top: 10vh;
+}
+.card {
+    display: flex;
+    align-items: center;
+    padding: 2vh;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #252525;
+    margin: 2vh;
+    transition: 0.3s;
+  }
+  
+  .userLogo {
+    width: 5vh;
+    height: 5vh;
+    border-radius: 50%;
+    margin-right: 20px;
+  }
+  .userLogo *{
+    font-size: large;
+  }
+  
+  .userInfo {
+    flex: 1;
+  }
+  
+  h2 {
+    margin: 0;
+  }
+  
+  p {
+    margin: 5px 0;
+  }
+  
+  .card:hover{
+    background-color: #022550;
+    color: #fff;
+  }
+
+
+
+
+
+  /*historique */
+
+  .his{
+    width: 90%;
+    margin-left: -8vh;
+    margin-top: 10vh;
+}

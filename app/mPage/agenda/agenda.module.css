@@ -1,7 +1,18 @@
+
+
 .agenda{
     margin-left: 3.5vw;
     margin-top: 2%;
 
+}
+
+.button button{
+    margin-top: 2vh;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.button button:hover{
+    padding-right: 5%;
 }
 
 .h{

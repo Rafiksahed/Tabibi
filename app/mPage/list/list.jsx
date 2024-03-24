@@ -27,8 +27,10 @@ function List() {
                                         <h3 className={styles.name}>Mr Test klm</h3>
                                         <p className={styles.details}>plus de detail</p>
                                     </div>
+                                    <div className={styles.button}>
                                     <button className={styles.mainB}><b>Envoyer un message</b></button>
                                     <button className={styles.seconB}><b>Reporter Rendez-vous</b></button>
+                                    </div>
                                 </div>
                             </li>
                         ))}

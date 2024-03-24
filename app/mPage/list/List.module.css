@@ -17,6 +17,9 @@
     padding: 1%;
     padding-left: 0;
 }
+.liste li{
+    cursor: pointer;
+}
 .liste::-webkit-scrollbar {
     width: 12px;
 }
@@ -86,6 +89,8 @@
     color: white;
     padding: 1%;
     border: none;
+    margin: 0 1vh;
+    cursor: pointer;
 }
 .seconB{
     border-radius: 10px;
@@ -93,4 +98,6 @@
     color: white;
     padding: 0 7px;
     border: none;
+    margin: 0 1vh;
+    cursor: pointer;
 }

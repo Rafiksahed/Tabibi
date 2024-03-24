@@ -1,10 +1,17 @@
+'use client'
+
 import Image from 'next/image'
 import styles from './page.module.css'
 import Boutton from './components/boutton'
 import BouttonP from "./components/bouttonP"
 import Nav from './components/nav'
 
+
 export default function Home() {
+
+  const login = () =>{
+    window.location.href = './login'
+  }
   
   return (
     <div className={styles.main}>
@@ -38,12 +45,12 @@ export default function Home() {
           <div className={styles.box}>
             <h2>Prenez facilement <br/>un rendez-vous</h2>
             <p>prise de rendez-vous facile <br />il vous suffit juste de crée un compte</p>
-            <Boutton />
+            <Boutton onClick={login} textz='sign up'/>
           </div>
           <div>
             <h2>Vous etes <br/>medecin ?</h2>
             <p>Vous voulez rejoindre l aventure ? <br />Enregistrer vous pour commencer</p>
-            <Boutton />
+            <Boutton onClick={login} textz='sign up'/>
           </div>
        </div>
       </div>
@@ -110,7 +117,8 @@ export default function Home() {
              soin de vous et répondre à vos besoins médicaux. 
              Prenez rendez-vous dès maintenant .
           </p>
-          <BouttonP />
+          <Boutton onClick={login} textz='Prendre rendez-vous'/>
+      
         </div>
         <div>
           <Image 

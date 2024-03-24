@@ -41,6 +41,12 @@
     margin-right: 4%;
     border: none;
     border-radius: 15px;
+    padding: 2vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.3s;
 }
 .confirm{
     background-color: var(--second-color);

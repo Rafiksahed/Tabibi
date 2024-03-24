@@ -15,3 +15,9 @@
     border-bottom: 3px solid var(--second-color); /* Bordure basse pour l'onglet sélectionné */
 }
 
+.list .tab button{
+    border: none;
+    font-size: large;
+    padding: 2vh;
+    cursor: pointer;
+}
