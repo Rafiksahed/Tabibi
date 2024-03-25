@@ -1,4 +1,11 @@
 
+
+
+.form{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 .form select{
     padding: 3vh;
     border: none;
@@ -6,6 +13,25 @@
     box-shadow: 0 0 0.3vh #252525;
     float: right;
     margin: 3vh;
+}
+
+
+
+.form input[type="text"]{
+  all:unset;
+  color: var(--main-color);
+  margin-left: 20px;
+  font-size: 1.3rem;
+}
+
+.form form{
+  background-color: #e6e6e6;
+  padding: 1vh;
+  width: 30vw;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  margin: 3vh;
 }
 
 /* HorizontalCard.module.css */

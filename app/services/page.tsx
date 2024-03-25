@@ -4,24 +4,44 @@ import React, { useState } from 'react';
 import Nav from '../components/nav';
 import styles from './page.module.css';
 import Link from 'next/link';
+import Image from 'next/image';
 
 function Page() {
   const [selectedOption, setSelectedOption] = useState('all');
+  const [searchText, setSearchText] = useState('');
 
   const handleChange = (event) => {
     setSelectedOption(event.target.value);
     
+  };
+  const handleSearchSubmit = (event) => {
+    setSearchText(event.target.value);
   };
 
   const goToProfile =()=>{
     window.location.href = '/profile'
   }
 
+
   return (
     <div>
       <Nav />
       
       <div className={styles.form}>
+
+      <form action="">
+            <label htmlFor="">
+            <Image 
+              src="/img/searchIcon.png"
+              alt='search icon'
+              width={30}
+              height={30}
+            />
+            </label>
+            <input type="text" placeholder='specialité , Nom' onChange={handleSearchSubmit}/>
+           </form>
+
+
         <select name="filter" id="" onChange={handleChange}>
           <option value="all">All</option>
           <option value="Cardiologue">Cardiologue</option>
@@ -29,6 +49,7 @@ function Page() {
           <option value="Generaliste">Generaliste</option>
           <option value="Orthopedics">Orthopedics</option>
         </select>
+        
       </div>
 
 
