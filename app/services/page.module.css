@@ -1,0 +1,59 @@
+
+.form select{
+    padding: 3vh;
+    border: none;
+    background-color: #e6e6e6;
+    box-shadow: 0 0 0.3vh #252525;
+    float: right;
+    margin: 3vh;
+}
+
+/* HorizontalCard.module.css */
+
+.card {
+    width: 95%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 3vh;
+    padding: 2vh;
+    margin: 2vh;
+    background-color: #f1f1f1;
+  }
+  .card button {
+    margin-right: 1vh;
+  }
+  
+  .cardContent {
+    flex: 1;
+    text-decoration: none;
+    color: #252525;
+  }
+  
+  .orderButton {
+    background-color: #022550;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  .detail {
+    background-color: #022550;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .orderButton:hover, .detail:hover {
+    background-color: #0056b3;
+  }
+  

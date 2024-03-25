@@ -5,6 +5,7 @@ import styles from './page.module.css'
 import Boutton from './components/boutton'
 import BouttonP from "./components/bouttonP"
 import Nav from './components/nav'
+import Footer from './components/footer'
 
 
 export default function Home() {
@@ -129,6 +130,8 @@ export default function Home() {
           />
         </div>
       </div>
+
+      <Footer />
     </div>
   )
 }
