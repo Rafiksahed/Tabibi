@@ -16,10 +16,9 @@
     width: 50vw;
     padding: 1%;
     padding-left: 0;
-}
-.liste li{
     cursor: pointer;
 }
+
 .liste::-webkit-scrollbar {
     width: 12px;
 }
@@ -64,8 +63,8 @@
 .selected .mainB{
     background-color: white;
     color: var(--main-color);
-    padding: 0.5%;
 }
+
 .ctn_list{
     display: flex;
     justify-content: space-between;
@@ -87,7 +86,7 @@
     border-radius: 10px;
     background-color: var(--main-color);
     color: white;
-    padding: 1%;
+    padding: 3% 3%;
     border: none;
     margin: 0 1vh;
     cursor: pointer;
@@ -96,8 +95,13 @@
     border-radius: 10px;
     background-color: #7E91A8;
     color: white;
-    padding: 0 7px;
+    padding: 3% 5%;
     border: none;
     margin: 0 1vh;
     cursor: pointer;
+}
+.button{
+    display: flex;
+    height: fit-content;
+
 }

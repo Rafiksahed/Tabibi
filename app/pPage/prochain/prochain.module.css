@@ -1,0 +1,98 @@
+
+.prochain{
+    width: 50vw;
+    margin-top: 3%;
+} 
+.liste{
+    overflow-y: scroll;
+}
+.liste::-webkit-scrollbar {
+    width: 12px;
+}
+.liste::-webkit-scrollbar-thumb {
+    background-color: var(--main-color);
+    border-radius: 6px; 
+}
+
+
+.liste::-webkit-scrollbar-track {
+    background-color: var(--third-color); 
+    border-radius: 6px; 
+}
+
+
+.element , .elementE, .element2{
+    margin-bottom: 2%;
+    display: flex;
+    justify-content: space-between;
+
+    padding: 1%;
+    border-bottom: 1px solid var(--third-color);
+    margin-right: 1vw;
+}
+
+.date{
+    color: var(--main-color);
+}
+
+.button{
+  display: flex;
+  justify-content: space-between;
+
+  width: 20vw;
+  padding: 1%;
+}
+.attente{
+    background-color: #667b93;
+    border-radius: 10px;
+    color: white;
+    padding: 1% 2%;
+}
+.confirm{
+   background-color: green;
+   color: white;
+   border-radius: 10px;
+   padding: 1% 2%;
+   width: fit-content;
+   height: fit-content;
+}
+.envoyer, .envoyer2{
+    border: none;
+    background-color: var(--main-color);
+    border-radius: 5px;
+    color: white;
+    padding: 1% 2%;
+    width: fit-content;
+    height: fit-content;
+}
+.elementE{
+    color: #667b93;
+}
+.element2{
+    background-color: var(--main-color);
+    height: 30vh;
+    border-radius: 15px;
+    color: white;
+    padding: 2%;
+    display: block;
+}
+.element2 .date{
+    color: var(--third-color);
+}
+.element2 .envoyer{
+    background-color: white;
+    color: var(--main-color);
+}
+.info{
+    margin-top: 4%;
+    margin-bottom: 4%;
+}
+.element2 .button{
+    margin-top: 4%;
+}
+.span{
+    color: var(--third-color);
+}
+.mail{
+    margin-bottom: 2%;
+}

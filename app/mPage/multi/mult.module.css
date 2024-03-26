@@ -12,12 +12,15 @@
     color: var(--main-color);
 }
 .selected {
-    border-bottom: 3px solid var(--second-color); /* Bordure basse pour l'onglet sélectionné */
+    border-bottom: 3px solid var(--second-color); 
 }
 
-.list .tab button{
+.button{
     border: none;
+    size: 1em;
     font-size: large;
-    padding: 2vh;
     cursor: pointer;
+    background-color: white;
+    padding-bottom: 2%;
+    color: var(--main-color);
 }

@@ -28,8 +28,8 @@ function List() {
                                         <p className={styles.details}>plus de detail</p>
                                     </div>
                                     <div className={styles.button}>
-                                    <button className={styles.mainB}><b>Envoyer un message</b></button>
-                                    <button className={styles.seconB}><b>Reporter Rendez-vous</b></button>
+                                       <button className={styles.mainB}><b>Envoyer un message</b></button>
+                                       <button className={styles.seconB}><b>Reporter  Rendez-vous</b></button>
                                     </div>
                                 </div>
                             </li>

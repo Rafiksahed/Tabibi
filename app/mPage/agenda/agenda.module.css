@@ -3,17 +3,14 @@
 .agenda{
     margin-left: 3.5vw;
     margin-top: 2%;
-
 }
 
-.button button{
+.button{
     margin-top: 2vh;
     cursor: pointer;
     transition: 0.3s;
 }
-.button button:hover{
-    padding-right: 5%;
-}
+
 
 .h{
     color: var(--main-color);
@@ -63,4 +60,56 @@
     background-color: var(--main-color);
     color: white;
     padding: 1%;
+}
+/** FORM STYLE **/
+.h2{
+   color: var(--main-color);
+   margin-top: 4%;
+}
+
+.form{
+    font-size: 1.4rem;
+    margin-top: 1%;
+    line-height: 2.1rem;
+    margin-bottom: 4%;
+}
+.date , .heure{
+    margin-right: 3%;
+}
+.dateI{
+    margin-right: 3%;
+    font-size: 1.1rem;
+    color: var(--main-color);
+    border:1px solid var(--second-color);
+}
+.HeureI{
+  font-size: 1.1rem;
+  color: var(--main-color);
+  border: 1px solid var(--second-color);
+}
+.flexF{
+    display: flex;
+}
+.dcr{
+  margin-top: 1%;
+}
+
+.textA{
+    border: 1px solid var(--second-color);
+    font-size: 1.1rem;
+    margin-left: 3%;
+    margin-top: 1%;
+}
+.ajout{
+    border: none;
+    background-color: var(--main-color);
+    color: white;
+    font-size: 1.3rem;
+    padding: 0.5% 2%;
+    border-radius: 10px;
+    margin-top: 1%;
+    margin-left: 30%;
+}
+.ajout:hover{
+    background-color: rgb(14, 45, 170);
 }

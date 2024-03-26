@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import React from 'react';
 import styles from './agenda.module.css';
 
@@ -43,11 +43,22 @@ function Agenda() {
     });
   };
 
+  
+  const handleFormSubmit = (e) => {
+    /*e.preventDefault();
+    const formData = new FormData(e.target);
+    const date = formData.get('date');
+    const hour = formData.get('heure');
+    const description = formData.get('description');
+    addEvent(formatDate(date), hour, description);*/
+  };
+   
+
   addEvent('24 mars', '8', 'mr ded');
   addEvent('24 mars', '9', 'mr tsa');
-  addEvent('24 mars', '11', 'mme jaadad');
+  addEvent('29 mars', '11', 'mme jaadadczczczcz');
   addEvent('27 mars', '10', 'mme');
-  addEvent('25 mars', '14', 'mme zfzfzfzf');
+  addEvent('28 mars', '14', 'mme zfzfzfzf');
 
   return (
     <div className={styles.agenda}> 
@@ -84,7 +95,25 @@ function Agenda() {
           ))}
         </tbody>
       </table>
-      
+      <div className={styles.propre}>
+          <h2 className={styles.h2}>Ajouter mes propre Rendez-vous</h2>
+          <form onSubmit={handleFormSubmit} className={styles.form}>
+            <div className={styles.flexF}>
+             <label htmlFor="date" className={styles.date}>Date :</label>
+             <input type="date" id="date" name="date" required className={styles.dateI}/>
+             <br />
+             <label htmlFor="heure" className={styles.heure}>Heure :</label>
+             <input type="text" id="heure" name="heure" required className={styles.HeureI}/>
+             </div>
+            <div className={styles.dcr}>
+              <label htmlFor="description" className={styles.desc}>Description</label>
+              <br />
+              <textarea name="description"  id="description" cols="30" rows="10" className={styles.textA} />
+              <br />
+            </div>
+            <button type="submit" className={styles.ajout}>Ajouter</button>
+          </form>
+      </div>
     </div>
   );
 }
