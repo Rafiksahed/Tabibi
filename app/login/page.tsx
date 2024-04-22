@@ -118,9 +118,10 @@ const sendLoginData = async () => {
 
         const responseData = await response.json();
         // Save the login data in the loggedInUser variable
-        loggedInUser = responseData.user;
+        loggedInUser = responseData.username;
         console.log('Logged in user:', loggedInUser);
-        location.href = './'
+        location.href = `./mPage/?username=${loggedInUser}`;
+        alert(patientEmail)
         // Optionally, redirect the user to another page or perform other actions
     } catch (error) {
         console.error('Error logging in:', error.message);

@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const mysql = require('mysql');
+const mysql = require('mysql2');
 const cors = require('cors');
 
 
@@ -66,13 +66,15 @@ app.post('/api/login', (req, res) => {
       // Check if any rows were returned
       if (results.length > 0) {
           // Authentication successful
-          res.status(200).json({ success: true, message: 'Login successful' });
+          const username = results[0].username; // Assuming 'username' is the column name in your database
+          res.status(200).json({ success: true, message: 'Login successful', username: username });
       } else {
           // Authentication failed
           res.status(401).json({ success: false, message: 'Invalid email or password' });
       }
   });
 });
+
 
 
 
