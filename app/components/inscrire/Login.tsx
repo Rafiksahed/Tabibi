@@ -81,6 +81,122 @@ const trans2 =() =>{
 
 
 function Login() {
+
+
+    
+    const sendRegistreDataPatient = async () => {
+        const patientNameInput = document.getElementById('patientName') as HTMLInputElement;
+        const patientNumberInput = document.getElementById('patientNumber') as HTMLInputElement;
+        const patientEmailInput = document.getElementById('patientEmail') as HTMLInputElement;
+        const patientPasswordInput = document.getElementById('patientPassword') as HTMLInputElement;
+        const confirmPatientPasswordInput = document.getElementById('patientConfirmpassword') as HTMLInputElement;
+    
+        const patientName = patientNameInput.value;
+        const patientNumber = patientNumberInput.value;
+        const patientEmail = patientEmailInput.value;
+        const patientPassword = patientPasswordInput.value;
+        const confirmPatientPassword = confirmPatientPasswordInput.value;
+    
+    
+        if (patientName !== '' && patientEmail !== '' && patientPassword !== '' && patientNumber !== '') {
+            if (confirmPatientPassword === patientPassword) {
+                try {
+                    const response = await fetch('http://localhost:3001/api/registre', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            username: patientName,
+                            number: patientNumber,
+                            email: patientEmail,
+                            password: patientPassword,
+                        })
+                    });
+    
+                    if (!response.ok) {
+                        throw new Error('Failed to register');
+                    } else {
+                        location.href = '/';
+                    }
+    
+                    const responseData = await response.json();
+                    // Handle the response data as needed
+                    console.log(responseData);
+                } catch (error) {
+                    console.error('Error registering:', error);
+                }
+            } else {
+                // Passwords don't match
+            }
+        } else {
+            alert('All fields are mandatory');
+        }
+    };
+    
+
+    let specChoice: string;
+
+const spec = (choice: string) => {
+    console.log(choice);
+    specChoice = choice; // Set the specChoice variable to the chosen specialization
+    return choice;
+}
+
+const sendRegistreDataMedecin = async () => {
+    const medecinNameInput = document.getElementById('medecinName') as HTMLInputElement;
+    const medecinNumberInput = document.getElementById('medecinNumber') as HTMLInputElement;
+    const medecinEmailInput = document.getElementById('medecinEmail') as HTMLInputElement;
+    const medecinPasswordInput = document.getElementById('medecinPassword') as HTMLInputElement;
+    const confirmmedecinPasswordInput = document.getElementById('medecinConfirmpassword') as HTMLInputElement;
+
+    const medecinName = medecinNameInput.value;
+    const medecinNumber = medecinNumberInput.value;
+    const medecinEmail = medecinEmailInput.value;
+    const medecinPassword = medecinPasswordInput.value;
+    const confirmmedecinPassword = confirmmedecinPasswordInput.value;
+
+    const specValue = specChoice; // Pass your choice as an argument here
+
+    if (medecinName !== '' && medecinEmail !== '' && medecinPassword !== '' && medecinNumber !== '') {
+        if (confirmmedecinPassword === medecinPassword) {
+            try {
+                const response = await fetch('http://localhost:3001/api/registreMedecin', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        username: medecinName,
+                        number: medecinNumber,
+                        email: medecinEmail,
+                        password: medecinPassword,
+                        spec: specValue // Pass spec value here if needed
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to register');
+                } else {
+                    location.href = '/';
+                }
+
+                const responseData = await response.json();
+                // Handle the response data as needed
+                console.log(responseData);
+            } catch (error) {
+                console.error('Error registering:', error);
+            }
+        } else {
+            // Passwords don't match
+        }
+    } else {
+        alert('All fields are mandatory');
+    }
+};
+
+
+
   return (
     <div className='allmain'>
 
@@ -105,34 +221,34 @@ function Login() {
         </div>
     <div>
         <label htmlFor="name"><FaUser /></label>
-        <input type="text" id='name' placeholder='le nom et le prenom' />
+        <input type="text" id='patientName' placeholder='le nom et le prenom' />
     </div>
 
     <div>
     <label htmlFor="number"><FaPhoneAlt /></label>
-    <input type="number" id='number' placeholder='number' />
+    <input type="number" id='patientNumber' placeholder='number' />
 </div>
 
 <div>
     <label htmlFor="email"><MdEmail /></label>
-    <input type="email" id='email' placeholder='email' />
+    <input type="email" id='patientEmail' placeholder='email' />
 </div>
 
 <div>
     <label htmlFor="password"><FaLock /></label>
-    <input type="password" id='password' placeholder='mot de pass' />
+    <input type="password" id='patientPassword' placeholder='mot de pass' />
 </div>
 
 
 <div>
     <label htmlFor="confirmpassword"><FaLock /></label>
-    <input type="password" id='confirmpassword' placeholder='confirmez votre mot de pass' />
+    <input type="password" id='patientConfirmpassword' placeholder='confirmez votre mot de pass' />
 </div>
 
 
 <h5>vous avez deja un compte ? <Link href="/login">connecter</Link></h5>
 
-<button> S'inscrire </button>
+<button onClick={sendRegistreDataPatient}> S'inscrire </button>
 
 </center>
 </div>
@@ -156,28 +272,28 @@ function Login() {
         </div>
     <div>
         <label htmlFor="name"><FaUser /></label>
-        <input type="text" id='name' placeholder='le nom et le prenom' />
+        <input type="text" id='medecinName' placeholder='le nom et le prenom' />
     </div>
 
 <div>
     <label htmlFor="number"><FaPhoneAlt /></label>
-    <input type="number" id='number' placeholder='number' />
+    <input type="number" id='medecinNumber' placeholder='number' />
 </div>
 
 <div>
     <label htmlFor="email"><MdEmail /></label>
-    <input type="email" id='email' placeholder='email' />
+    <input type="email" id='medecinEmail' placeholder='email' />
 </div>
 
 <div>
-    <label htmlFor="password"><MdBloodtype /></label>
-    <input type="password" id='password' placeholder='mot de pass' />
+    <label htmlFor="password"><FaLock /></label>
+    <input type="password" id='medecinPassword' placeholder='mot de pass' />
 </div>
 
 
 <div>
-    <label htmlFor="password"><MdBloodtype /></label>
-    <input type="password" id='password2' placeholder='confirmez votre mot de pass' />
+    <label htmlFor="password"><FaLock /></label>
+    <input type="password" id='medecinConfirmpassword' placeholder='confirmez votre mot de pass' />
 </div>
 
 <h5>vous avez deja un compte ? <Link href="/login">connecter</Link></h5>
@@ -196,19 +312,19 @@ function Login() {
         </center>
 </div>
 <div className='specialite'>
-    <button className='card'>Cardiologue</button>
-    <button className='card'>Dermatology</button>
-    <button className='card'>Orthopedics </button>
-    <button className='card'>Gastroenterology</button>
-    <button className='card'>Ophthalmology</button>
-    <button className='card'>Obstetrics and Gynecology</button>
-    <button className='card'>Pediatrics</button>
-    <button className='card'>Psychiatry</button>
-    <button className='card'>Oncology</button>
-    <button className='card'>Dentiste</button>
-    <button className='card'>generaliste</button>
-    <button className='card'>Psychiatre</button>
-    <button className='connect'> S'inscrire </button>
+<button className='card' onClick={() => spec('Cardiologue')}>Cardiologue</button>
+    <button className='card' onClick={() => spec('Dermatology')}>Dermatology</button>
+    <button className='card' onClick={() => spec('Orthopedics')}>Orthopedics </button>
+    <button className='card' onClick={() => spec('Gastroenterology')}>Gastroenterology</button>
+    <button className='card' onClick={() => spec('Ophthalmology')}>Ophthalmology</button>
+    <button className='card' onClick={() => spec('Obstetrics and Gynecology')}>Obstetrics and Gynecology</button>
+    <button className='card' onClick={() => spec('Pediatrics')}>Pediatrics</button>
+    <button className='card' onClick={() => spec('Psychiatry')}>Psychiatry</button>
+    <button className='card' onClick={() => spec('Oncology')}>Oncology</button>
+    <button className='card' onClick={() => spec('Dentiste')}>Dentiste</button>
+    <button className='card' onClick={() => spec('generaliste')}>generaliste</button>
+    <button className='card' onClick={() => spec('Psychiatre')}>Psychiatre</button>
+    <button className='connect' onClick={sendRegistreDataMedecin}> S'inscrire </button>
     <button className='return' onClick={nonchoix}><IoMdReturnLeft /></button>
 </div>
 </div>

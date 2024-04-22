@@ -86,6 +86,84 @@ const trans2 =() =>{
 
 
 function page() {
+
+
+
+
+    // Define a variable to hold the login data
+let loggedInUser = null;
+
+const sendLoginData = async () => {
+    const patientEmailInput = document.getElementById('patientEmail') as HTMLInputElement;
+    const patientPasswordInput = document.getElementById('patientPassword') as HTMLInputElement;
+
+    const patientEmail = patientEmailInput.value;
+    const patientPassword = patientPasswordInput.value;
+
+    try {
+        const response = await fetch('http://localhost:3001/api/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: patientEmail,
+                password: patientPassword
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to login');
+        }
+
+        const responseData = await response.json();
+        // Save the login data in the loggedInUser variable
+        loggedInUser = responseData.user;
+        console.log('Logged in user:', loggedInUser);
+        location.href = './'
+        // Optionally, redirect the user to another page or perform other actions
+    } catch (error) {
+        console.error('Error logging in:', error.message);
+    }
+};
+
+
+
+
+const sendLoginDataMedecin = async () => {
+    const medecinEmailInput = document.getElementById('medecinEmail') as HTMLInputElement;
+    const medecinPasswordInput = document.getElementById('medecinPassword') as HTMLInputElement;
+
+    const medecinEmail = medecinEmailInput.value;
+    const medecinPassword = medecinPasswordInput.value;
+
+    try {
+        const response = await fetch('http://localhost:3001/api/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: medecinEmail,
+                password: medecinPassword
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to login');
+        }
+
+        const responseData = await response.json();
+        // Save the login data in the loggedInUser variable
+        loggedInUser = responseData.user;
+        console.log('Logged in user:', loggedInUser);
+        location.href = './'
+        // Optionally, redirect the user to another page or perform other actions
+    } catch (error) {
+        console.error('Error logging in:', error.message);
+    }
+};
+
     
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
@@ -117,16 +195,16 @@ function page() {
         </div>
     <div>
     <label htmlFor="email"><MdEmail /></label>
-    <input type="email" id='email' placeholder='email' />
+    <input type="email" id='patientEmail' placeholder='email' />
 </div>
 <div>
     <label htmlFor="password"><FaLock /></label>
-    <input type="text" id='password' placeholder='mot de pass' />
+    <input type="password" id='patientPassword' placeholder='mot de pass' />
 </div>
 <h5 className={styles.oublier} onClick={choix}>vous aver oublier votre mot de pass ?</h5>
 <h5>vous aver pas un compte ? <Link href="/inscrire">S'inscrire</Link></h5>
 
-<button> S'inscrire </button>
+<button onClick={sendLoginData}> Connection </button>
 
 </center>
 </div>
@@ -151,18 +229,18 @@ function page() {
 
 <div>
     <label htmlFor="email"><MdEmail /></label>
-    <input type="email" id='email' placeholder='email' />
+    <input type="email" id='medecinEmail' placeholder='email' />
 </div>
 
 <div>
     <label htmlFor="password"><FaLock /></label>
-    <input type="text" id='password' placeholder='mot de pass' />
+    <input type="password" id='medecinPassword' placeholder='mot de pass' />
 </div>
 
 <h5 className={styles.oublier} onClick={choix}>vous aver oublier votre mot de pass ?</h5>
 <h5>vous aver pas un compte ? <Link href="/inscrire">S'inscrire</Link></h5>
 
-<button> connection </button>
+<button onClick={sendLoginDataMedecin}> connection </button>
 
 </center>
 </div>

@@ -1,154 +1,109 @@
 'use client'
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, ChangeEvent } from 'react';
 import Nav from '../components/nav';
 import styles from './page.module.css';
-import Link from 'next/link';
 import Image from 'next/image';
 
+interface Doctor {
+  name: string;
+  speciality: string;
+  location: string;
+}
+
 function Page() {
+
   const [selectedOption, setSelectedOption] = useState('all');
   const [searchText, setSearchText] = useState('');
+  const [myData, setMyData] = useState<Doctor[]>([]);
 
-  const handleChange = (event) => {
-    setSelectedOption(event.target.value);
-    
-  };
-  const handleSearchSubmit = (event) => {
-    setSearchText(event.target.value);
+  const fetchdataOption = async (option: string) => {
+    let url = 'http://localhost:3001/info';
+    if (option !== 'all') {
+      url += `?speciality=${option}`;
+    }
+    const res = await fetch(url);
+    const data = await res.json();
+    setMyData(data);
+    console.log(data);
   };
 
-  const goToProfile =()=>{
-    window.location.href = '/profile'
+  const fetchdataText = async (text: string) => {
+    let url = 'http://localhost:3001/info';
+    if (text.trim() !== '') {
+      url += `?username=${text}`;
+    }
+    const res = await fetch(url);
+    const data = await res.json();
+    setMyData(data);
+  };
+
+  const handleChange = async (event: ChangeEvent<HTMLSelectElement>) => {
+    const option = event.target.value;
+    setSelectedOption(option);
+    await fetchdataOption(option);
+  };
+
+  const handleSearchSubmit = async (event: ChangeEvent<HTMLInputElement>) => {
+    const text = event.target.value;
+    setSearchText(text);
+    await fetchdataText(text);
+  };
+
+  useEffect(() => {
+    fetchdataOption(selectedOption);
+  }, [selectedOption]);
+
+  useEffect(() => {
+    fetchdataText(searchText);
+  }, [searchText]);
+
+
+
+
+  const goToProfile = () =>{
+    window.location.href='/profile'
   }
-
-
   return (
     <div>
       <Nav />
-      
-      <div className={styles.form}>
 
-      <form action="">
-            <label htmlFor="">
-            <Image 
+      <div className={styles.form}>
+        <form action="">
+          <label htmlFor="">
+            <Image
               src="/img/searchIcon.png"
               alt='search icon'
               width={30}
               height={30}
             />
-            </label>
-            <input type="text" placeholder='specialité , Nom' onChange={handleSearchSubmit}/>
-           </form>
+          </label>
+          <input type="text" placeholder='specialité , Nom' value={searchText} onChange={handleSearchSubmit} />
+        </form>
 
-
-        <select name="filter" id="" onChange={handleChange}>
+        <select name="filter" id="" onChange={handleChange} value={selectedOption}>
           <option value="all">All</option>
-          <option value="Cardiologue">Cardiologue</option>
-          <option value="Dentiste">Dentiste</option>
-          <option value="Generaliste">Generaliste</option>
-          <option value="Orthopedics">Orthopedics</option>
+          <option value="cardiologue">Cardiologue</option>
+          <option value="dentiste">Dentiste</option>
+          <option value="generaliste">Generaliste</option>
+          <option value="orthopedics">Orthopedics</option>
         </select>
-        
       </div>
 
-
-
-
-      {selectedOption === 'all' && (
-
-
-        <div>
-      <div className={styles.card}>
-        <div className={styles.cardContent}>
-          <h3>Rafik sahed</h3>
-          <p>Cardiologue</p>
-          <p>Blida</p>
-        </div>
-        <button className={styles.orderButton}>Prenez rendez-vous</button>
-        <button className={styles.detail} onClick={goToProfile}>Plus de détails</button>
+      {/* Display data based on selected option */}
+      <div>
+        {myData.map((dataItem, index) => (
+          <div key={index} className={styles.card}>
+            <div className={styles.cardContent}>
+              <h3>{dataItem.username}</h3>
+              <p>{dataItem.speciality}</p>
+              <p>{dataItem.location}</p>
+            </div>
+            <button className={styles.orderButton}>Prenez rendez-vous</button>
+            <button className={styles.detail} onClick={goToProfile}>Plus de détails</button>
+          </div>
+        ))}
       </div>
-
-      <div className={styles.card}>
-        <div className={styles.cardContent}>
-          <h3>Anes amrane</h3>
-          <p>Generaliste</p>
-          <p>Blida</p>
-        </div>
-        <button className={styles.orderButton}>Prenez rendez-vous</button>
-        <button className={styles.detail} onClick={goToProfile}>Plus de détails</button>
-      </div>
-
-      <div className={styles.card}>
-        <div className={styles.cardContent}>
-          <h3>Kacem yacine djeghab</h3>
-          <p>Dentiste</p>
-          <p>Blida</p>
-        </div>
-        <button className={styles.orderButton}>Prenez rendez-vous</button>
-        <button className={styles.detail} onClick={goToProfile}>Plus de détails</button>
-      </div>
-
-      </div>
-
-    )}
-
-
-
-
-
-
-
-
-      {selectedOption === 'Cardiologue' && (
-
-
-<div className={styles.card}>
-        <div className={styles.cardContent}>
-          <h3>Rafik sahed</h3>
-          <p>Cardiologue</p>
-          <p>Blida</p>
-        </div>
-        <button className={styles.orderButton}>Prenez rendez-vous</button>
-        <button className={styles.detail} onClick={goToProfile}>Plus de détails</button>
-      </div>
-
-)}
-
-
-{selectedOption === 'Generaliste' && (
-
-
-<div className={styles.card}>
-<div className={styles.cardContent}>
-  <h3>Anes amrane</h3>
-  <p>Generaliste</p>
-  <p>Blida</p>
-</div>
-<button className={styles.orderButton}>Prenez rendez-vous</button>
-<button className={styles.detail} onClick={goToProfile}>Plus de détails</button>
-</div>
-
-)}
-
-
-
-{selectedOption === 'Dentiste' && (
-
-
-<div className={styles.card}>
-        <div className={styles.cardContent}>
-          <h3>Kacem yacine djeghab</h3>
-          <p>Dentiste</p>
-          <p>Blida</p>
-        </div>
-        <button className={styles.orderButton}>Prenez rendez-vous</button>
-        <button className={styles.detail} onClick={goToProfile}>Plus de détails</button>
-      </div>
-
-
-)}
-
     </div>
   );
 }
