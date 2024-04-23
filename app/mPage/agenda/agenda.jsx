@@ -58,7 +58,7 @@ function Agenda() {
   addEvent('24 mars', '9', 'mr tsa');
   addEvent('29 mars', '11', 'mme jaadadczczczcz');
   addEvent('27 mars', '10', 'mme');
-  addEvent('28 mars', '14', 'mme zfzfzfzf');
+  addEvent('23 avril', '14', 'mme zfzfzfzf');
 
   return (
     <div className={styles.agenda}> 

@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const mysql = require('mysql');
+const mysql = require('mysql2');
 const cors = require('cors');
 
 
@@ -153,7 +153,7 @@ app.post('/api/registreMedecin', (req, res) => {
 
 
 // Start the server
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3301;
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
