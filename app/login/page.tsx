@@ -117,19 +117,15 @@ const sendLoginData = async () => {
         }
 
         const responseData = await response.json();
-        // Save the login data in the loggedInUser variable
-        loggedInUser = responseData.username;
-        console.log('Logged in user:', loggedInUser);
-        location.href = `./mPage/?username=${loggedInUser}`;
-        alert(patientEmail)
+        // Save the user data in session storage
+        sessionStorage.setItem('loggedInUser', JSON.stringify(responseData.username));
+        console.log('Logged in user:', responseData.username);
+        location.href = `./mPage/?username=${responseData.username}`;
         // Optionally, redirect the user to another page or perform other actions
     } catch (error) {
         console.error('Error logging in:', error.message);
     }
 };
-
-
-
 
 const sendLoginDataMedecin = async () => {
     const medecinEmailInput = document.getElementById('medecinEmail') as HTMLInputElement;
@@ -155,15 +151,16 @@ const sendLoginDataMedecin = async () => {
         }
 
         const responseData = await response.json();
-        // Save the login data in the loggedInUser variable
-        loggedInUser = responseData.user;
-        console.log('Logged in user:', loggedInUser);
-        location.href = './'
+        // Save the user data in session storage
+        sessionStorage.setItem('loggedInUser', JSON.stringify(responseData.user));
+        console.log('Logged in user:', responseData.user);
+        location.href = './';
         // Optionally, redirect the user to another page or perform other actions
     } catch (error) {
         console.error('Error logging in:', error.message);
     }
 };
+
 
     
     // eslint-disable-next-line react-hooks/rules-of-hooks
