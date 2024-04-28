@@ -25,8 +25,9 @@ module.exports = (req, res) => {
               res.status(500).json({ success: false, message: 'Error inserting patient data' });
               return;
           }
+          req.session.user = username;
 
-          res.status(200).json({ success: true, message: 'Patient registration successful' });
+          res.status(200).json({ success: true, message: 'Patient registration successful', user: username });
       });
   });
 };
