@@ -98,8 +98,8 @@ let loggedInUser = null;
 
 const sendLoginData = async (event) => {
     event.preventDefault();
-    const patientEmailInput = document.getElementById('patientEmail') as HTMLInputElement;
-    const patientPasswordInput = document.getElementById('patientPassword') as HTMLInputElement;
+    const patientEmailInput = document.getElementById('patientEmail');
+    const patientPasswordInput = document.getElementById('patientPassword');
 
     const patientEmail = patientEmailInput.value;
     const patientPassword = patientPasswordInput.value;
@@ -107,38 +107,33 @@ const sendLoginData = async (event) => {
     try {
         const response = await fetch('http://localhost:3001/api/login', {
             method: 'POST',
-            
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 email: patientEmail,
                 password: patientPassword
-            })
+            }),
+            credentials: 'include' // Assurez-vous que cela est inclus pour gérer les sessions avec cookies
         });
 
         if (!response.ok) {
-            setWrong(true);
             throw new Error('Failed to login');
         }
 
         const responseData = await response.json();
-        // Save the user data in session storage
-        localStorage.setItem('username', responseData.user_id);
-        // Redirect the user based on userType
+        // Redirection en fonction du type d'utilisateur
         if (responseData.userType === 'medecin') {
-            location.href = `/mPage?user_name=${responseData.username}`;
+            window.location.href = `/mPage?user_name=${responseData.username}`;
         } else if (responseData.userType === 'patient') {
-            location.href = `/pPage?user_name=${responseData.username}`;
+            window.location.href = `/pPage?user_name=${responseData.username}`;
         } else {
             console.error('Invalid user type');
         }
     } catch (error) {
-        console.error('Error logging in:', error.message);
-        setWrong(true);
+        console.error('Error logging in:', error);
     }
 };
-
 
     
     // eslint-disable-next-line react-hooks/rules-of-hooks

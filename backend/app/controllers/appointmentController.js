@@ -1,18 +1,13 @@
 const connection = require('../db');
 
 module.exports = (req, res) => {
-    // Vérifier si l'utilisateur est connecté et s'il est un médecin
-
-    const user = req.session.user;
-    console.log(req.session);
-    if (!user || !user.doctor_id) {
+    if (!req.session.user || !req.session.user.doctor_id) {
         res.status(401).json({ success: false, message: 'Unauthorized access' });
         return;
     }
 
-    const doctorId = user.doctor_id;
+    const doctorId = req.session.user.doctor_id;
 
-    // Requête SQL pour récupérer les rendez-vous acceptés du médecin avec les détails du patient
     const sql = `
         SELECT rv.appointment_id, p.username AS patient_name, rv.date_time
         FROM rendez_vous rv
@@ -22,15 +17,12 @@ module.exports = (req, res) => {
     `;
     const values = [doctorId];
 
-    // Exécution de la requête SQL
     connection.query(sql, values, (err, results) => {
         if (err) {
             console.error('Error fetching accepted doctor appointments:', err);
             res.status(500).json({ success: false, message: 'Internal server error' });
             return;
         }
-
-        // Envoi des rendez-vous acceptés récupérés en tant que réponse
         res.status(200).json({ success: true, acceptedAppointments: results });
     });
 };

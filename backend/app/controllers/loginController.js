@@ -1,9 +1,7 @@
-
 const connection = require('../db');
 
 module.exports = (req, res) => {
     const { email, password } = req.body;
-
     const sql = "SELECT u.user_id, u.username, d.doctor_id, p.patient_id FROM users u LEFT JOIN doctors d ON u.user_id = d.user_id LEFT JOIN patients p ON u.user_id = p.user_id WHERE u.email = ? AND u.password_hash = ?";
     const values = [email, password];
 
@@ -29,11 +27,8 @@ module.exports = (req, res) => {
                 return;
             }
 
-            req.session.user = user;
-            console.log(req.session); 
+            req.session.user = user; // Stockage des informations de l'utilisateur dans la session
             res.status(200).json({ success: true, message: 'Login successful', userType: userType, username: user.username, user_id: user.user_id});
-            
-
         } else {
             res.status(401).json({ success: false, message: 'Invalid email or password' });
         }

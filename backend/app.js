@@ -1,4 +1,3 @@
-// app.js
 const express = require('express');
 const appMiddleware = require('./app/middleware'); // Importez le middleware
 const routes = require('./app/routes');
@@ -14,5 +13,5 @@ app.use(routes);
 const port = process.env.PORT || 3001;
 
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+    console.log(`Server is running on port ${port}`);
 });
