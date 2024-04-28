@@ -6,13 +6,13 @@ const logoutController = require('./controllers/logoutController');
 const registrationController = require('./controllers/registrationController');
 const doctorRegistrationController = require('./controllers/doctorRegistrationController');
 const info = require('./controllers/info');
-const {getDoctorAppointments} = require('./controllers/appointmentController');
+const getDoctorAppointmentsController = require('./controllers/appointmentController');
 
 router.post('/api/login', loginController);
 router.post('/api/logout', logoutController);
 router.post('/api/registre', registrationController);
 router.post('/api/registreMedecin', doctorRegistrationController);
 router.get('/info', info);
-router.get('/api/appointments', getDoctorAppointments);
+router.get('/api/appointments', getDoctorAppointmentsController);
 
 module.exports = router;

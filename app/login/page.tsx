@@ -96,7 +96,7 @@ function page() {
     // Define a variable to hold the login data
 let loggedInUser = null;
 
-const sendLoginData = async (event: React.FormEvent<HTMLFormElement>) => {
+const sendLoginData = async (event) => {
     event.preventDefault();
     const patientEmailInput = document.getElementById('patientEmail') as HTMLInputElement;
     const patientPasswordInput = document.getElementById('patientPassword') as HTMLInputElement;
@@ -107,6 +107,7 @@ const sendLoginData = async (event: React.FormEvent<HTMLFormElement>) => {
     try {
         const response = await fetch('http://localhost:3001/api/login', {
             method: 'POST',
+            
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -117,57 +118,24 @@ const sendLoginData = async (event: React.FormEvent<HTMLFormElement>) => {
         });
 
         if (!response.ok) {
-            setWrong(true)
-            console.log(wrong);
+            setWrong(true);
             throw new Error('Failed to login');
         }
 
         const responseData = await response.json();
         // Save the user data in session storage
-        sessionStorage.setItem('loggedInUser', JSON.stringify(responseData.user));
-        console.log('Logged in user:', responseData.user);
-        location.href = `./mPage/?username=${responseData.user}`;
-        // Optionally, redirect the user to another page or perform other actions
-    } catch (error) {
-        console.error('Error logging in:', error.message);
-        setWrong(true)
-    }
-};
-
-const sendLoginDataMedecin = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const medecinEmailInput = document.getElementById('medecinEmail') as HTMLInputElement;
-    const medecinPasswordInput = document.getElementById('medecinPassword') as HTMLInputElement;
-
-    const medecinEmail = medecinEmailInput.value;
-    const medecinPassword = medecinPasswordInput.value;
-
-    try {
-        const response = await fetch('http://localhost:3001/api/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                email: medecinEmail,
-                password: medecinPassword
-            })
-        });
-
-        if (!response.ok) {
-            setWrong(true)
-            throw new Error('Failed to login');
+        localStorage.setItem('username', responseData.user_id);
+        // Redirect the user based on userType
+        if (responseData.userType === 'medecin') {
+            location.href = `/mPage?user_name=${responseData.username}`;
+        } else if (responseData.userType === 'patient') {
+            location.href = `/pPage?user_name=${responseData.username}`;
+        } else {
+            console.error('Invalid user type');
         }
-
-        const responseData = await response.json();
-        // Save the user data in session storage
-        sessionStorage.setItem('loggedInUser', JSON.stringify(responseData.user));
-        console.log('Logged in user:', responseData.user);
-        location.href = `./mPage/?username=${responseData.user}`;
-        // Optionally, redirect the user to another page or perform other actions
     } catch (error) {
         console.error('Error logging in:', error.message);
-        setWrong(true)
+        setWrong(true);
     }
 };
 
