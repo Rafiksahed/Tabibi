@@ -254,3 +254,20 @@
 .medecinmain .specialite .card:hover{
     box-shadow: 0 0 0.6vh #262626;
 }
+
+
+
+.wrong, .confPass{
+    color: #e41212;
+}
+.logo{
+    position: absolute;
+    top: 2vh;
+    left: 11vh;
+}
+
+.logo2{
+    position: absolute;
+    top: 2vh;
+    right: 11vh;
+}

@@ -11,6 +11,8 @@ import { MdBloodtype } from "react-icons/md";
 import { FaPhoneAlt } from "react-icons/fa";
 import { IoMdReturnLeft } from "react-icons/io";
 import { FaLock } from "react-icons/fa";
+import { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 
 const trans =() =>{
@@ -82,9 +84,11 @@ const trans2 =() =>{
 
 function Login() {
 
-
+    const [wrong, setWrong] = useState(false);
+    const [confPass, setConfPass] = useState(true);
     
-    const sendRegistreDataPatient = async () => {
+    const sendRegistreDataPatient = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
         const patientNameInput = document.getElementById('patientName') as HTMLInputElement;
         const patientNumberInput = document.getElementById('patientNumber') as HTMLInputElement;
         const patientEmailInput = document.getElementById('patientEmail') as HTMLInputElement;
@@ -115,19 +119,23 @@ function Login() {
                     });
     
                     if (!response.ok) {
+                        setWrong(true)
                         throw new Error('Failed to register');
-                    } else {
-                        location.href = '/';
-                    }
+                    } 
     
                     const responseData = await response.json();
-                    // Handle the response data as needed
-                    console.log(responseData);
+                    // Save the user data in session storage
+                    sessionStorage.setItem('loggedInUser', JSON.stringify(responseData.user));
+                    console.log('Logged in user:', responseData.user);
+                    location.href = `./pPage/?username=${responseData.user}`;
+                    // Optionally, redirect the user to another page or perform other actions
                 } catch (error) {
                     console.error('Error registering:', error);
+                    setWrong(true)
                 }
             } else {
                 // Passwords don't match
+                setConfPass(false)
             }
         } else {
             alert('All fields are mandatory');
@@ -143,7 +151,8 @@ const spec = (choice: string) => {
     return choice;
 }
 
-const sendRegistreDataMedecin = async () => {
+const sendRegistreDataMedecin = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     const medecinNameInput = document.getElementById('medecinName') as HTMLInputElement;
     const medecinNumberInput = document.getElementById('medecinNumber') as HTMLInputElement;
     const medecinEmailInput = document.getElementById('medecinEmail') as HTMLInputElement;
@@ -176,19 +185,22 @@ const sendRegistreDataMedecin = async () => {
                 });
 
                 if (!response.ok) {
+                    setWrong(true)
                     throw new Error('Failed to register');
-                } else {
-                    location.href = '/';
-                }
+                } 
 
                 const responseData = await response.json();
-                // Handle the response data as needed
-                console.log(responseData);
+                // Save the user data in session storage
+                sessionStorage.setItem('loggedInUser', JSON.stringify(responseData.user));
+                console.log('Logged in user:', responseData.user);
+                location.href = `./mPage/?username=${responseData.user}`;
+                // Optionally, redirect the user to another page or perform other actions
             } catch (error) {
                 console.error('Error registering:', error);
+                setWrong(true)
             }
         } else {
-            // Passwords don't match
+            setConfPass(false)
         }
     } else {
         alert('All fields are mandatory');
@@ -204,6 +216,14 @@ const sendRegistreDataMedecin = async () => {
         {/* this is for patient */}  
 
     <div className='patientmain' id='patientmain'>
+    <div className="logo">
+        <Link href='/'>
+        <Image 
+                          src="/img/logoT.png"
+                          width={130}
+                          height={50} alt={''}        />
+        </Link>
+        </div>
         <div className='bienvenue' id='bienvenue'>
             <div>
             <h2>vous avez un medecin!</h2>
@@ -213,7 +233,7 @@ const sendRegistreDataMedecin = async () => {
                 <button onClick={trans}> S'inscrire tant que medecin </button>
             </div>
         </div>
-        <div className='myloginpage'>
+        <form className='myloginpage'>
             <center>
         <div className='description'>
         <h1> Bonjour a tabibi </h1>
@@ -244,6 +264,12 @@ const sendRegistreDataMedecin = async () => {
     <label htmlFor="confirmpassword"><FaLock /></label>
     <input type="password" id='patientConfirmpassword' placeholder='confirmez votre mot de pass' />
 </div>
+{wrong == true &&
+<h5 className="wrong">Le nom et le prenom deja exist.</h5>
+}
+{confPass == false &&
+<h5 className="wrong">Les mots de passe ne correspondent pas.</h5>
+}
 
 
 <h5>vous avez deja un compte ? <Link href="/login">connecter</Link></h5>
@@ -251,7 +277,7 @@ const sendRegistreDataMedecin = async () => {
 <button onClick={sendRegistreDataPatient}> S'inscrire </button>
 
 </center>
-</div>
+</form>
 
     </div>
 
@@ -264,7 +290,15 @@ const sendRegistreDataMedecin = async () => {
 
 
     <div className='medecinmain' id='medecinmain'>
-        <div className='myloginpage' id='choix'>
+    <div className="logo2">
+        <Link href='/'>
+        <Image 
+                          src="/img/logoT.png"
+                          width={130}
+                          height={50} alt={''}        />
+        </Link>
+        </div>
+        <form className='myloginpage' id='choix'>
             <center>
         <div className='description'>
         <h1> Bonjour a tabibi </h1>
@@ -295,13 +329,20 @@ const sendRegistreDataMedecin = async () => {
     <label htmlFor="password"><FaLock /></label>
     <input type="password" id='medecinConfirmpassword' placeholder='confirmez votre mot de pass' />
 </div>
+{wrong == true &&
+<h5 className="wrong">Le nom et le prenom deja exist.</h5>
+}
+{confPass == false &&
+<h5 className="wrong">Les mots de passe ne correspondent pas.</h5>
+}
+
 
 <h5>vous avez deja un compte ? <Link href="/login">connecter</Link></h5>
 
 <button onClick={choix}> Continue </button>
 
 </center>
-</div>
+</form>
 
 <div className='specialitepage'>
 <div>

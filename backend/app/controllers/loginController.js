@@ -15,7 +15,7 @@ module.exports = (req, res) => {
     }
 
     if (results.length > 0) {
-      const user = results[0];
+      const user = results[0].username;
       req.session.user = user;
       res.status(200).json({ success: true, message: 'Login successful', user: user });
     } else {

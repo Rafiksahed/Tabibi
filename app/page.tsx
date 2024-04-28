@@ -13,8 +13,13 @@ export default function Home() {
   const login = () =>{
     window.location.href = './login'
   }
-  
+  const search = () =>{
+      location.href = './services'
+  }
   return (
+
+   
+
     <div className={styles.main}>
       <Nav />
        <div className={styles.accueil}>
@@ -29,7 +34,7 @@ export default function Home() {
               height={30}
             />
             </label>
-            <input type="text" placeholder='specialité , Nom' />
+            <input type="text" placeholder='specialité , Nom' onChange={search} />
            </form>
          </div>
          <div className={styles.mainImg}>
