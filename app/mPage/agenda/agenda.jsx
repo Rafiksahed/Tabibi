@@ -54,11 +54,11 @@ function Agenda() {
   };
    
 
-  addEvent('24 mars', '8', 'mr ded');
-  addEvent('24 mars', '9', 'mr tsa');
-  addEvent('29 mars', '11', 'mme jaadadczczczcz');
-  addEvent('27 mars', '10', 'mme');
-  addEvent('23 avril', '14', 'mme zfzfzfzf');
+  addEvent('29 avril', '9', 'mr test');
+  addEvent('3 mai', '9', 'mr test');
+  addEvent('28 avril', '11', 'mme test');
+  addEvent('29 avril', '10', 'mme test');
+  addEvent('30 avril', '14', 'mme test');
 
   return (
     <div className={styles.agenda}> 

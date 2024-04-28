@@ -5,7 +5,7 @@ import styles from './List.module.css';
 
 function List() {
     const [appointments, setAppointments] = useState([]); // État pour stocker les rendez-vous
-    const [selectedItem, setSelectedItem] = useState(null); // État pour suivre l'élément sélectionné
+    const [selectedItem, setSelectedItem] = useState(0); // Initialisation sur le premier élément par défaut
 
     // Fonction pour charger les rendez-vous depuis la base de données
     useEffect(() => {
@@ -17,6 +17,9 @@ function List() {
                 const data = await response.json();
                 if (data.success && response.ok) {
                     setAppointments(data.acceptedAppointments); // Stocker les données dans l'état
+                    if (data.acceptedAppointments.length > 0) {
+                        setSelectedItem(0); // Sélectionner le premier élément par défaut
+                    }
                 } else {
                     throw new Error('Failed to fetch appointments');
                 }
@@ -26,7 +29,7 @@ function List() {
         };
 
         fetchAppointments();
-    }, []); // Ce tableau vide signifie que l'effet ne s'exécutera qu'après le premier rendu
+    }, []);
 
     // Gestion des clics sur les éléments
     const handleItemClick = (index) => {
