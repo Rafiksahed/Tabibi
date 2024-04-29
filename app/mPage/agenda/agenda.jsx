@@ -1,10 +1,18 @@
-import { useState } from 'react';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './agenda.module.css';
 
 function Agenda() {
   const [startDate, setStartDate] = useState(new Date());
+  const [days, setDays] = useState([]);
 
+  // Effect to update days and fetch appointments on startDate change
+  useEffect(() => {
+    const newDays = updateDays(startDate);
+    setDays(newDays);
+    fetchAppointments(newDays);
+  }, [startDate]);
+
+  // Function to update days based on the current startDate
   const updateDays = (startDate) => {
     const nextDays = [];
     for (let i = 0; i < 6; i++) {
@@ -13,52 +21,53 @@ function Agenda() {
       const dayInfo = {
         day: nextDay.toLocaleDateString('fr-FR', { weekday: 'short' }),
         date: nextDay.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' }),
-        events: {} 
+        events: {}
       };
       nextDays.push(dayInfo);
     }
     return nextDays;
   };
 
-  const days = updateDays(startDate);
+  // Function to fetch appointments and update days with events
+  const fetchAppointments = async (daysToUpdate) => {
+    try {
+      const response = await fetch('http://localhost:3001/api/agenda', {
+        credentials: 'include'
+      });
+      const data = await response.json();
+      if (data.success) {
+        const updatedDays = daysToUpdate.map(day => {
+          data.appointments.forEach(appointment => {
+            const appointmentDate = new Date(appointment.date_time).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' });
+            const hour = new Date(appointment.date_time).getHours().toString();
+            if (day.date === appointmentDate) {
+              day.events[hour] = appointment.patient_name;
+            }
+          });
+          return day;
+        });
+        setDays(updatedDays);
+      } else {
+        console.error('Failed to fetch appointments:', data.message);
+      }
+    } catch (error) {
+      console.error('Error fetching appointments:', error);
+    }
+  };
 
+  // Function to move to the previous week
   const prevWeek = () => {
     const newStartDate = new Date(startDate);
-    newStartDate.setDate(newStartDate.getDate() - 7); 
+    newStartDate.setDate(startDate.getDate() - 7); 
     setStartDate(newStartDate); 
   };
 
+  // Function to move to the next week
   const nextWeek = () => {
     const newStartDate = new Date(startDate);
-    newStartDate.setDate(newStartDate.getDate() + 7); 
+    newStartDate.setDate(startDate.getDate() + 7); 
     setStartDate(newStartDate); 
   };
-
-
-  const addEvent = (date, hour, description) => {
-    days.forEach(day => {
-      if (day.date === date) {
-        day.events[hour] = description;
-      }
-    });
-  };
-
-  
-  const handleFormSubmit = (e) => {
-    /*e.preventDefault();
-    const formData = new FormData(e.target);
-    const date = formData.get('date');
-    const hour = formData.get('heure');
-    const description = formData.get('description');
-    addEvent(formatDate(date), hour, description);*/
-  };
-   
-
-  addEvent('29 avril', '9', 'mr test');
-  addEvent('3 mai', '9', 'mr test');
-  addEvent('28 avril', '11', 'mme test');
-  addEvent('29 avril', '10', 'mme test');
-  addEvent('30 avril', '14', 'mme test');
 
   return (
     <div className={styles.agenda}> 
@@ -95,27 +104,9 @@ function Agenda() {
           ))}
         </tbody>
       </table>
-      <div className={styles.propre}>
-          <h2 className={styles.h2}>Ajouter mes propre Rendez-vous</h2>
-          <form onSubmit={handleFormSubmit} className={styles.form}>
-            <div className={styles.flexF}>
-             <label htmlFor="date" className={styles.date}>Date :</label>
-             <input type="date" id="date" name="date" required className={styles.dateI}/>
-             <br />
-             <label htmlFor="heure" className={styles.heure}>Heure :</label>
-             <input type="text" id="heure" name="heure" required className={styles.HeureI}/>
-             </div>
-            <div className={styles.dcr}>
-              <label htmlFor="description" className={styles.desc}>Description</label>
-              <br />
-              <textarea name="description"  id="description" cols="30" rows="10" className={styles.textA} />
-              <br />
-            </div>
-            <button type="submit" className={styles.ajout}>Ajouter</button>
-          </form>
-      </div>
     </div>
   );
 }
 
 export default Agenda;
+``
