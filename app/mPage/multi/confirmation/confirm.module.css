@@ -65,5 +65,7 @@
 }
 .h{
     color: rgb(2, 18, 87);
+    width: fit-content;
+    margin-bottom: 5%;
 }
 

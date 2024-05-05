@@ -104,9 +104,26 @@ function Agenda() {
           ))}
         </tbody>
       </table>
+      <div className={styles.propre}>
+          <h1 className={styles.h2}>Ajouter mes propre Rendez-vous</h1>
+          <form  className={styles.form}>
+            <div className={styles.flexF}>
+             <label htmlFor="date" className={styles.date}>Date et Heure:</label>
+             <input type="datetime-local" id="dateTime" name="dateTime"  required className={styles.dateI} />
+             </div>
+            <div className={styles.dcr}>
+              <label htmlFor="username" className={styles.desc}>Nom et Prenom : </label>
+              <br />
+              <input type="text" id="username" name="username" className={styles.HeureI}/>
+              <br />
+              
+            </div>
+            <button type="submit" className={styles.ajout}>Ajouter</button>
+          </form>
+      </div>
     </div>
   );
 }
 
 export default Agenda;
-``
+

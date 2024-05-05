@@ -69,31 +69,42 @@
 
 .form{
     font-size: 1.4rem;
-    margin-top: 1%;
+    margin-top: 3%;
     line-height: 2.1rem;
-    margin-bottom: 4%;
+    margin-bottom: 8%;
+    margin-left: 1%;
+    background-color: #c0d6f134;
+    border-radius: 30px;
+    padding: 1%;
+    width: 40%;
 }
-.date , .heure{
+.date{
     margin-right: 3%;
 }
 .dateI{
     margin-right: 3%;
+
     font-size: 1.1rem;
     color: var(--main-color);
-    border:1px solid var(--second-color);
+   /* border:1px solid var(--second-color);*/
 }
 .HeureI{
   font-size: 1.1rem;
   color: var(--main-color);
-  border: 1px solid var(--second-color);
+  /*border: 1px solid var(--second-color); */
+  
 }
 .flexF{
     display: flex;
 }
 .dcr{
-  margin-top: 1%;
-}
+  margin-top: 5%;
+  display: flex;
 
+}
+.desc{
+    margin-right: 1.1rem;
+}
 .textA{
     border: 1px solid var(--second-color);
     font-size: 1.1rem;
@@ -107,8 +118,8 @@
     font-size: 1.3rem;
     padding: 0.5% 2%;
     border-radius: 10px;
-    margin-top: 1%;
-    margin-left: 30%;
+    margin-top: 7%;
+    margin-left: 80%;
 }
 .ajout:hover{
     background-color: rgb(14, 45, 170);
