@@ -96,7 +96,7 @@ function page() {
     // Define a variable to hold the login data
 let loggedInUser = null;
 
-const sendLoginData = async (event) => {
+const sendLoginData = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const patientEmailInput = document.getElementById('patientEmail');
     const patientPasswordInput = document.getElementById('patientPassword');

@@ -57,7 +57,8 @@ const trans2 =() =>{
 }
     }
 
-    const choix = () =>{
+    const choix = (event: React.FormEvent<HTMLFormElement>) =>{
+        event.preventDefault();
         const specialitepage = document.querySelector('.specialitepage') as HTMLElement | null;
         const myloginpage = document.getElementById('choix');
 
@@ -165,7 +166,7 @@ const sendRegistreDataMedecin = async (event: React.FormEvent<HTMLFormElement>) 
     const medecinPassword = medecinPasswordInput.value;
     const confirmmedecinPassword = confirmmedecinPasswordInput.value;
 
-    const specValue = specChoice; // Pass your choice as an argument here
+    let specValue = specChoice; // Pass your choice as an argument here
 
     if (medecinName !== '' && medecinEmail !== '' && medecinPassword !== '' && medecinNumber !== '') {
         if (confirmmedecinPassword === medecinPassword) {
@@ -328,6 +329,10 @@ const sendRegistreDataMedecin = async (event: React.FormEvent<HTMLFormElement>) 
 <div>
     <label htmlFor="password"><FaLock /></label>
     <input type="password" id='medecinConfirmpassword' placeholder='confirmez votre mot de pass' />
+</div>
+<div>
+    <label htmlFor="document"><FaLock /></label>
+    <input type="file" id='document' placeholder='envoyer votre certificat document' />
 </div>
 {wrong == true &&
 <h5 className="wrong">Le nom et le prenom deja exist.</h5>

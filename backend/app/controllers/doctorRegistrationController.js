@@ -2,7 +2,7 @@
 const connection = require('../db');
 
 module.exports = (req, res) => {
-  const { username, number, email, password, speciality } = req.body;
+  const { username, number, email, password, spec } = req.body;
 
   const userSql = "INSERT INTO users (username, password_hash, email, phone_number) VALUES (?, ?, ?, ?)";
   const userValues = [username, password, email, number];
@@ -17,7 +17,7 @@ module.exports = (req, res) => {
       const insertedId = userResults.insertId;
 
       const medecinSql = "INSERT INTO doctors (user_id, username, speciality) VALUES (?, ?, ?)";
-      const medecinValues = [insertedId, username, speciality];
+      const medecinValues = [insertedId, username, spec];
       
       connection.query(medecinSql, medecinValues, (err, medecinResults) => {
           if (err) {
@@ -26,7 +26,10 @@ module.exports = (req, res) => {
               return;
           }
 
-          res.status(200).json({ success: true, message: 'Doctor registration successful' });
+          req.session.user = username;
+
+          res.status(200).json({ success: true, message: 'Doctor registration successful', user: username });
+          console.log(username)
       });
   });
 };
