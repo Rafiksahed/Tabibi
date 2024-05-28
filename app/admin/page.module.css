@@ -50,3 +50,14 @@
 .table button:hover{
     background-color: red;
 }
+.table .accepted{
+    padding: 2vh;
+    cursor: pointer;
+    background-color: #3eda45;
+    color: #fff;
+    border: none;
+    transition: 0.3s;
+}
+.table .accepted:hover{
+    background-color: #218b27;
+}

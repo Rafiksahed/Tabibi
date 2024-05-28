@@ -159,12 +159,14 @@ const sendRegistreDataMedecin = async (event: React.FormEvent<HTMLFormElement>) 
     const medecinEmailInput = document.getElementById('medecinEmail') as HTMLInputElement;
     const medecinPasswordInput = document.getElementById('medecinPassword') as HTMLInputElement;
     const confirmmedecinPasswordInput = document.getElementById('medecinConfirmpassword') as HTMLInputElement;
+    const documentInput = document.getElementById('document') as HTMLInputElement;
 
     const medecinName = medecinNameInput.value;
     const medecinNumber = medecinNumberInput.value;
     const medecinEmail = medecinEmailInput.value;
     const medecinPassword = medecinPasswordInput.value;
     const confirmmedecinPassword = confirmmedecinPasswordInput.value;
+    
 
     let specValue = specChoice; // Pass your choice as an argument here
 
@@ -181,7 +183,7 @@ const sendRegistreDataMedecin = async (event: React.FormEvent<HTMLFormElement>) 
                         number: medecinNumber,
                         email: medecinEmail,
                         password: medecinPassword,
-                        spec: specValue // Pass spec value here if needed
+                        spec: specValue, // Pass spec value here if needed
                     })
                 });
 
@@ -330,8 +332,7 @@ const sendRegistreDataMedecin = async (event: React.FormEvent<HTMLFormElement>) 
     <label htmlFor="password"><FaLock /></label>
     <input type="password" id='medecinConfirmpassword' placeholder='confirmez votre mot de pass' />
 </div>
-<div>
-    <label htmlFor="document"><FaLock /></label>
+<div className='file'>
     <input type="file" id='document' placeholder='envoyer votre certificat document' />
 </div>
 {wrong == true &&

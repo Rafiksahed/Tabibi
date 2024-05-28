@@ -2,7 +2,7 @@ const connection = require('../../db');
 
 
 const adminPanelMedecin = (req, res) => {
-    const sql = "SELECT * FROM doctors WHERE status = 'accepted'";
+    const sql = "SELECT * FROM rendez_vous";
 
     connection.query(sql, (err, results) => {
         if (err) {

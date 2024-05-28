@@ -23,24 +23,76 @@ function Confirm() {
 
         fetchAppointments();
     }, []);
-
-    // Fonction pour formater les dates
-    const formatDate = (dateTime) => {
+    
+    // Fonction pour formater les dates avec l'heure
+    /**const formatDateTime = (dateTime) => {
         const date = new Date(dateTime);
-        return date.toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' });
+        return date.toLocaleString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+    };**/
+    const formatDateTime = (dateTime) => {
+        const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+        return new Date(dateTime).toLocaleDateString('fr-FR', options);
     };
 
+    // Fonction pour confirmer un rendez-vous
+    const handleConfirmAppointment = async (appointmentId) => {
+        try {
+            const response = await fetch('http://localhost:3001/api/accept', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ appointmentId }),
+                credentials: 'include'
+            });
+            const data = await response.json();
+            if (response.ok && data.success) {
+                // Mettre à jour les rendez-vous après la confirmation
+                const updatedAppointments = appointments.filter(appointment => appointment.appointment_id !== appointmentId);
+                setAppointments(updatedAppointments);
+            } else {
+                throw new Error(data.message || 'Failed to confirm appointment');
+            }
+        } catch (error) {
+            console.error('Error confirming appointment:', error);
+        }
+    };
+
+    // Fonction pour décliner un rendez-vous
+    const handleDeclineAppointment = async (appointmentId) => {
+        try {
+            const response = await fetch('http://localhost:3001/api/decline', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ appointmentId }),
+                credentials: 'include'
+            });
+            const data = await response.json();
+            if (response.ok && data.success) {
+                // Mettre à jour les rendez-vous après le déclin
+                const updatedAppointments = appointments.filter(appointment => appointment.appointment_id !== appointmentId);
+                setAppointments(updatedAppointments);
+            } else {
+                throw new Error(data.message || 'Failed to decline appointment');
+            }
+        } catch (error) {
+            console.error('Error declining appointment:', error);
+        }
+    };
+    
     return (
         <div className={styles.main}>
             <ul className={styles.list}>
                 {appointments.map((appointment) => (
                     <li key={appointment.appointment_id} className={styles.element}>
                         <div className={styles.ctn}>
-                            <h3 className={styles.h}>pour le {formatDate(appointment.date_time)}</h3>
+                            <h3 className={styles.h}>le {formatDateTime(appointment.date_time)} h</h3>
                             <p>{appointment.patient_name}</p>
                         </div>
-                        <button className={styles.confirm}>Confirmer</button>
-                        <button className={styles.decline}>Décliner</button>
+                        <button className={styles.confirm} onClick={() => handleConfirmAppointment(appointment.appointment_id)}>Confirmer</button>
+                        <button className={styles.decline} onClick={() => handleDeclineAppointment(appointment.appointment_id)}>Décliner</button>
                     </li>
                 ))}
             </ul>

@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useState, useEffect } from 'react';
 import styles from './List.module.css';
 
@@ -16,8 +14,9 @@ function List() {
                 });
                 const data = await response.json();
                 if (data.success && response.ok) {
-                    setAppointments(data.acceptedAppointments); // Stocker les données dans l'état
-                    if (data.acceptedAppointments.length > 0) {
+                    const sortedAppointments = sortAppointmentsByDate(data.acceptedAppointments);
+                    setAppointments(sortedAppointments); // Stocker les données dans l'état
+                    if (sortedAppointments.length > 0) {
                         setSelectedItem(0); // Sélectionner le premier élément par défaut
                     }
                 } else {
@@ -30,6 +29,21 @@ function List() {
 
         fetchAppointments();
     }, []);
+
+    // Fonction pour trier les rendez-vous par date, en plaçant ceux dont la date est passée au début de la liste
+    const sortAppointmentsByDate = (appointments) => {
+        const currentDate = new Date();
+        const futureAppointments = [];
+        const pastAppointments = [];
+        appointments.forEach(appointment => {
+            if (new Date(appointment.date_time) >= currentDate) {
+                futureAppointments.push(appointment);
+            } else {
+                pastAppointments.unshift(appointment);
+            }
+        });
+        return [...futureAppointments, ...pastAppointments];
+    };
 
     // Gestion des clics sur les éléments
     const handleItemClick = (index) => {
@@ -73,3 +87,4 @@ function List() {
 }
 
 export default List;
+

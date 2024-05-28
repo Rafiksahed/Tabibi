@@ -15,9 +15,10 @@ module.exports = (req, res) => {
       }
 
       const insertedId = userResults.insertId;
+      const status = 'attente';
 
-      const medecinSql = "INSERT INTO doctors (user_id, username, speciality) VALUES (?, ?, ?)";
-      const medecinValues = [insertedId, username, spec];
+      const medecinSql = "INSERT INTO doctors (user_id, username, speciality, status) VALUES (?, ?, ?, ?)";
+      const medecinValues = [insertedId, username, spec, status];
       
       connection.query(medecinSql, medecinValues, (err, medecinResults) => {
           if (err) {

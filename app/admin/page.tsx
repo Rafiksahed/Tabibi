@@ -7,24 +7,32 @@ import Link from 'next/link';
 interface User {
     doctor_id: number;
     patient_id: number;
+    appointment_id: number;
   user_id: number;
   username: string;
   email: string;
   phone_number: string;
   speciality: string;
+  date_time: string;
+  status: string;
   // Define other properties here
 }
 
 function Page() {
   const [data, setData] = useState<User[]>([]);
   const [dataMedecin, setDataMedecin] = useState<User[]>([]);
+  const [dataMedecinStatus, setDataMedecinStatus] = useState<User[]>([]);
   const [dataPatient, setDataPatient] = useState<User[]>([]);
+  const [dataAppointement, setDataAppointement] = useState<User[]>([]);
+
 
   
   useEffect(() => {
     fetchData();
     fetchDataMedecin();
+    fetchDataMedecinStatus();
     fetchDataPatient();
+    fetchDataAppointement();
   }, []);
 
   const [select, setSelect] = useState('users')
@@ -65,6 +73,21 @@ function Page() {
     }
   };
 
+
+  const fetchDataMedecinStatus = async () => {
+    try {
+      const url = 'http://localhost:3001/api/adminPanelMedecinStatus';
+      const res = await fetch(url);
+      if (!res.ok) {
+        throw new Error('Failed to fetch data');
+      }
+      const jsonDataMedecin = await res.json();
+      setDataMedecinStatus(jsonDataMedecin.data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
   const fetchDataPatient = async () => {
     try {
       const url = 'http://localhost:3001/api/adminPanelPatient';
@@ -80,6 +103,21 @@ function Page() {
   };
 
 
+  const fetchDataAppointement = async () => {
+    try {
+      const url = 'http://localhost:3001/api/adminPanelAppointement';
+      const res = await fetch(url);
+      if (!res.ok) {
+        throw new Error('Failed to fetch data');
+      }
+      const jsonDataAppointement = await res.json();
+      setDataAppointement(jsonDataAppointement.data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+
   useEffect(() => {
     console.log(data);
   }, [data]);
@@ -87,8 +125,14 @@ function Page() {
     console.log(dataMedecin);
   }, [dataMedecin]);
   useEffect(() => {
+    console.log(dataMedecinStatus);
+  }, [dataMedecinStatus]);
+  useEffect(() => {
     console.log(dataPatient);
   }, [dataPatient]);
+  useEffect(() => {
+    console.log(dataAppointement);
+  }, [dataAppointement]);
 
 
   const block = async (userId: number) => {
@@ -119,6 +163,39 @@ function Page() {
   
     } catch (error) {
       console.error('Error blocking user:', error);
+      // Optionally, provide feedback to the user about the error
+    }
+  };
+
+
+  const accepted = async (userId: number) => {
+    console.log(`Blocking user with ID: ${userId}`);
+    const user_id = userId;
+    location.reload();
+    
+    try {
+      const response = await fetch('http://localhost:3001/api/adminAcceptMedecin', {
+        method: 'put',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          user_id: user_id
+        })
+      });
+      
+  
+      if (!response.ok) {
+        throw new Error('accepted');
+      }
+  
+      const responseData = await response.json();
+      console.log('User accepted successfully:', responseData);
+      // Optionally, perform any additional actions after blocking the user
+      
+  
+    } catch (error) {
+      console.error('Error accepting user:', error);
       // Optionally, provide feedback to the user about the error
     }
   };
@@ -232,6 +309,73 @@ function Page() {
   </tbody>
 </table>
  )}
+
+
+
+
+ 
+{select == "rendz" && (
+
+<table className={styles.table}>
+  <thead>
+    <tr>
+      <th>APPOINTMENT ID</th>
+      <th>DOCTOR ID</th>
+      <th>PATIENT ID</th>
+      <th>DATE TIME</th>
+      <th>STATUS</th>
+      {/* Add more headers as per your data structure */}
+    </tr>
+  </thead>
+  <tbody>
+    {dataAppointement.map((item, index) => (
+      <tr key={index}>
+        <td>{item.appointment_id}</td>
+        <td>{item.doctor_id}</td>
+        <td>{item.patient_id}</td>
+        <td>{item.date_time}</td>
+        <td>{item.status}</td>
+        {/* Render other data fields here */}
+      </tr>
+    ))}
+  </tbody>
+</table>
+ )}
+
+
+
+
+ 
+{select == "aprove" && (
+
+<table className={styles.table}>
+  <thead>
+    <tr>
+      <th>doctor_id</th>
+      <th>user_id</th>
+      <th>username</th>
+      <th>speciality</th>
+      <th>status</th>
+      {/* Add more headers as per your data structure */}
+    </tr>
+  </thead>
+  <tbody>
+    {dataMedecinStatus.map((item, index) => (
+      <tr key={index}>
+        <td>{item.doctor_id}</td>
+        <td>{item.user_id}</td>
+        <td>{item.username}</td>
+        <td>{item.speciality}</td>
+        <td>{item.status}</td>
+        <td><button onClick={() => accepted(item.user_id)} className={styles.accepted}>Accepte</button></td>
+        <td><button onClick={() => block(item.user_id)}>refuse</button></td>
+        {/* Render other data fields here */}
+      </tr>
+    ))}
+  </tbody>
+</table>
+ )}
+
     </div>
   );
 }
