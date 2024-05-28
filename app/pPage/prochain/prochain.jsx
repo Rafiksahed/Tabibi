@@ -4,6 +4,8 @@ import styles from './prochain.module.css';
 function PatientList() {
     const [appointments, setAppointments] = useState([]); 
     const [selectedItem, setSelectedItem] = useState(0); 
+    const [editing, setEditing] = useState(null); // État pour gérer quel rendez-vous est en cours d'édition
+    const [newDateTime, setNewDateTime] = useState('');
 
     useEffect(() => {
         const fetchAppointments = async () => {
@@ -19,10 +21,10 @@ function PatientList() {
                         setSelectedItem(0); 
                     }
                 } else {
-                    throw new Error('Failed to fetch patient appointments');
+                    throw new Error('Échec du chargement des rendez-vous des patients');
                 }
             } catch (error) {
-                console.error('Error fetching patient appointments:', error);
+                console.error('Erreur lors du chargement des rendez-vous des patients :', error);
             }
         };
 
@@ -63,30 +65,89 @@ function PatientList() {
             case 'expiré':
                 return styles.expiredStatus;
             default:
-                return ''; // Ajoutez ici une classe par défaut si nécessaire
+                return ''; // Ajouter une classe par défaut si nécessaire
+        }
+    };
+
+    const handleEdit = (appointmentId, dateTime) => {
+        setEditing(appointmentId);
+        setNewDateTime(dateTime); // Initialiser avec la date/heure actuelle du rendez-vous
+    };
+    const handleCancel = () => {
+        setEditing(null); // Arrête l'édition et cache l'input
+    };
+    
+    const handleDateChange = (e) => {
+        setNewDateTime(e.target.value);
+    };
+
+    const handleSave = async (appointmentId) => {
+        // Appel API pour mettre à jour le rendez-vous
+        try {
+            const response = await fetch('http://localhost:3001/api/updateRdv', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({appointmentId, newDateTime, status: 'attente' }),
+                credentials: 'include'
+            });
+            if (response.ok) {
+                const updatedAppointments = appointments.map(app => {
+                    if (app.appointment_id === appointmentId) {
+                        return { ...app, date_time: newDateTime, status: 'attente' };
+                    }
+                    return app;
+                });
+                setAppointments(updatedAppointments);
+                setEditing(null); // Réinitialiser l'état d'édition après avoir enregistré
+            } else {
+                throw new Error('Échec de la mise à jour du rendez-vous');
+            }
+        } catch (error) {
+            console.error('Erreur lors de l\'enregistrement de la nouvelle date/heure :', error);
         }
     };
 
     return (
         <div className={styles.dash}>
-           <div className={styles.liste}>
+            <h1 className={styles.h1}>Mes prochain Rendez-vous</h1>
+            <div className={styles.liste}>
                 <ul>
                     {appointments.map((appointment, index) => (
-                        <li 
-                            key={appointment.appointment_id}
-                            className={`${styles.element} ${selectedItem === index ? styles.selected : ''}`}
-                            onClick={() => handleItemClick(index)}
-                        >
-                            <h2 className={styles.date}>{formatDate(appointment.date_time)} h</h2>
-                            <div className={styles.ctn_list}>
-                                <div className={styles.descr}>
-                                    <h3 className={styles.name}>Dr {appointment.doctor_name}</h3>
-                                    <p className={`${styles.status} ${getStatusStyle(appointment.status)}`}>Status : {appointment.status}</p> {/* Affichage du statut */}
-                                    <p className={styles.details}>plus de details</p>
-                                </div>
-                                <div className={styles.button}>
-                                    <button className={styles.mainB}><b>Envoyer un message</b></button>
-                                    <button className={styles.seconB}><b>Reporter Rendez-vous</b></button>
+                        <li key={appointment.appointment_id} className={`${styles.element} ${selectedItem === index ? styles.selected : ''}`}>
+                            <div onClick={() => handleItemClick(index)}>
+                                <h2 className={styles.date}>{formatDate(appointment.date_time)} h</h2>
+                                <div className={styles.ctn_list}>
+                                    <div className={styles.descr}>
+                                        <h3 className={styles.name}>Dr {appointment.doctor_name}</h3>
+                                        {editing === appointment.appointment_id ? (
+                                       <div className={styles.update}>
+                                        <input type="datetime-local" value={newDateTime} onChange={handleDateChange} className={styles.input}/>
+                                        </div>
+                                          ) : (
+                                            <p></p>
+                                         )}
+                                        <p className={`${styles.status} ${getStatusStyle(appointment.status)}`}>Status : {appointment.status}</p>
+                                        
+                                    </div>
+                                    <div className={styles.button}>
+                                        {editing === appointment.appointment_id ? (
+                                            <button className={styles.seconB} onClick={() => handleSave(appointment.appointment_id)}><b>Valider</b></button>
+                                        ) : (
+                                            <button className={styles.seconB} onClick={() => handleEdit(appointment.appointment_id, appointment.date_time)}><b>Reporter Rendez-vous</b></button>
+                                            
+                                        )}
+                                        {editing === appointment.appointment_id ? (
+                                            <button className={styles.mainB} onClick={() => handleCancel()}><b>Anuler</b></button>
+                                        ) : (
+                                            <button className={styles.mainB}><b>Envoyer un message</b></button>
+                                            
+                                        )}
+                                        
+                                        
+                                    </div>
                                 </div>
                             </div>
                         </li>

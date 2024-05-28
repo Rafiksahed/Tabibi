@@ -12,6 +12,10 @@ const acceptRdv = require('./controllers/acceptRdv');
 const declineRdv = require('./controllers/declineRdv');
 const patientRdv = require('./controllers/patienRdv');
 const userType = require('./controllers/userTypeController');
+const updateRdv = require('./controllers/updateRdv');
+const services = require('./controllers/services');
+const { getAppointments, bookAppointment } = require('./controllers/rdvServices');
+
 
 router.post('/api/login', loginController);
 router.post('/api/logout', logoutController);
@@ -27,5 +31,13 @@ router.post('/api/accept', acceptRdv);
 router.get('/api/patientRdv', patientRdv);
 
 router.get('/api/userType', userType);
+
+router.put('/api/updateRdv', updateRdv);
+
+router.get('/api/services' , services);
+
+router.get('/api/rdvServices', getAppointments);
+router.post('/api/rdvServices', bookAppointment);
+
 
 module.exports = router;

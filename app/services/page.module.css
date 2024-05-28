@@ -6,14 +6,7 @@
   align-items: center;
   justify-content: space-between;
 }
-.form select{
-    padding: 3vh;
-    border: none;
-    background-color: #e6e6e6;
-    box-shadow: 0 0 0.3vh #252525;
-    float: right;
-    margin: 3vh;
-}
+
 
 
 
@@ -25,7 +18,7 @@
 }
 
 .form form{
-  background-color: #e6e6e6;
+  background-color: #f1f1f1;
   padding: 1vh;
   width: 30vw;
   border-radius: 30px;
@@ -42,12 +35,12 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    border: 1px solid #ccc;
+    border:0.5px solid var(--main-color);
     border-radius: 3vh;
     padding: 2vh;
     margin: 2vh;
-    background-color: #f1f1f1;
-  }
+    background-color: white;
+}
   .card button {
     margin-right: 1vh;
   }
@@ -83,3 +76,103 @@
     background-color: #0056b3;
   }
   
+  .bookedDate {
+    background-color: red;
+    color: white;
+  }
+  
+  .username{
+    color: var(--main-color);
+    margin-bottom: 1%;
+  }
+.ville{
+    color: var(--second-color);
+    margin-top: 1%;
+    margin-bottom: 0.5%;
+}
+
+.adr{
+  color: var(--main-color);
+}
+
+.prendreRdv{
+  all:unset;
+  background-color: var(--main-color);
+  color: white;
+  padding: 1%;
+  border-radius: 10px;
+}
+.prendreRdv:hover{
+  background-color: #0056b3;
+}
+.date{
+  font-size: 1.3rem;
+}
+
+.timePicker{
+ margin-top: 7%;
+ padding:1%;
+ font-size: 1.1rem;
+ margin-left: 5px;
+}
+
+.formContainer{
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+.confirm{
+  all: unset;
+  padding: 3%;
+  background-color: var(--main-color);
+  color: white;
+  border-radius: 10px;
+}
+.confirm:hover{
+  background-color: #0056b3;
+}
+.anuler{
+  all: unset;
+  padding: 3%;
+  background-color: white;
+  color: var(--main-color);
+  border: 1px solid var(--main-color);
+  border-radius: 10px;
+}
+
+.time{
+  margin-bottom: 5%;
+  font-size: 1.3rem;
+}
+.datePicker {
+  padding: 1%;
+  border: 1px solid var(--main-color);
+  border-radius: 5px;
+  font-size: 1.1rem;
+}
+.daytona{
+  margin-bottom: 5%;
+}
+.special{
+  display: flex;
+  align-items: center;
+  margin-right: 20%;
+  background-color: #f1f1F1;
+  padding: 0.5% 1%;
+  border-radius: 10px;
+  width: 25%;
+}
+.pFilter{
+  color: var(--main-color);
+
+}
+.selectFilter{
+  all: unset;
+
+  margin-left: 10%;
+  color: var(--main-color);
+  padding: 3%;
+  
+
+}
