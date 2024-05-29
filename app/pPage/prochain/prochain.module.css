@@ -5,10 +5,12 @@
 }
 
 .dash {
-    margin-left: 1vw;
-    margin-top: 5vh;
+    margin-left: 4vw;
+    margin-top: 8vh;
 }
-
+.h1{
+    color: var(--main-color);
+}
 .hC {
     color: var(--main-color);
     margin-bottom: 1%;
@@ -21,6 +23,7 @@
     padding: 1%;
     padding-left: 0;
     cursor: pointer;
+    margin-top: 3vh;
 }
 
 .liste::-webkit-scrollbar {
@@ -83,7 +86,7 @@
 }
 
 .descr {
-    margin-right: 15vw;
+    margin-right: 10vw;
 }
 
 .name {
@@ -102,6 +105,7 @@
     border: none;
     margin: 0 1vh;
     cursor: pointer;
+    width: 50%;
 }
 
 .seconB {
@@ -112,11 +116,13 @@
     border: none;
     margin: 0 1vh;
     cursor: pointer;
+    width: 50%;
 }
 
 .button {
     display: flex;
-    height: fit-content;
+    height: 20%;
+    width: 40%;
 }
 
 .status{
@@ -139,4 +145,15 @@
 
 .expiredStatus{
     color: #7e91a8e4;
+}
+
+.update{
+    margin-top: 10%;
+}
+.input{
+    padding: 1%;
+    color: var(--main-color);
+    font-size: 1.1rem;
+    border-radius: 5px;
+    border: none;
 }

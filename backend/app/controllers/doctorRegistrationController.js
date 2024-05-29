@@ -2,7 +2,7 @@
 const connection = require('../db');
 
 module.exports = (req, res) => {
-  const { username, number, email, password, spec } = req.body;
+  const { username, number, email, password, spec, ville, adresse } = req.body;
 
   const userSql = "INSERT INTO users (username, password_hash, email, phone_number) VALUES (?, ?, ?, ?)";
   const userValues = [username, password, email, number];
@@ -17,8 +17,8 @@ module.exports = (req, res) => {
       const insertedId = userResults.insertId;
       const status = 'attente';
 
-      const medecinSql = "INSERT INTO doctors (user_id, username, speciality, status) VALUES (?, ?, ?, ?)";
-      const medecinValues = [insertedId, username, spec, status];
+      const medecinSql = "INSERT INTO doctors (user_id, username, speciality, status, ville, adresse) VALUES (?, ?, ?, ?, ?, ?)";
+      const medecinValues = [insertedId, username, spec, status, ville, adresse];
       
       connection.query(medecinSql, medecinValues, (err, medecinResults) => {
           if (err) {

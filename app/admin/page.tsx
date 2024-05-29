@@ -15,6 +15,8 @@ interface User {
   speciality: string;
   date_time: string;
   status: string;
+  ville: string;
+  adresse: string;
   // Define other properties here
 }
 
@@ -244,6 +246,7 @@ function Page() {
               <td>{item.username}</td>
               <td>{item.email}</td>
               <td>{item.phone_number}</td>
+    
               <td><button onClick={() => block(item.user_id)}>block user</button></td>
               {/* Render other data fields here */}
             </tr>
@@ -264,6 +267,8 @@ function Page() {
       <th>user_id</th>
       <th>username</th>
       <th>speciality</th>
+      <th>ville</th>
+      <th>adresse</th>
       <th>block</th>
       {/* Add more headers as per your data structure */}
     </tr>
@@ -275,6 +280,8 @@ function Page() {
         <td>{item.user_id}</td>
         <td>{item.username}</td>
         <td>{item.speciality}</td>
+        <td>{item.ville}</td>
+        <td>{item.adresse}</td>
         <td><button onClick={() => block(item.user_id)}>block user</button></td>
         {/* Render other data fields here */}
       </tr>
@@ -355,7 +362,10 @@ function Page() {
       <th>user_id</th>
       <th>username</th>
       <th>speciality</th>
+      <th>ville</th>
+      <th>adresse</th>
       <th>status</th>
+      
       {/* Add more headers as per your data structure */}
     </tr>
   </thead>
@@ -366,6 +376,8 @@ function Page() {
         <td>{item.user_id}</td>
         <td>{item.username}</td>
         <td>{item.speciality}</td>
+        <td>{item.ville}</td>
+        <td>{item.adresse}</td>
         <td>{item.status}</td>
         <td><button onClick={() => accepted(item.user_id)} className={styles.accepted}>Accepte</button></td>
         <td><button onClick={() => block(item.user_id)}>refuse</button></td>

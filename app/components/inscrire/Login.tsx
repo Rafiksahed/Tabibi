@@ -13,6 +13,8 @@ import { IoMdReturnLeft } from "react-icons/io";
 import { FaLock } from "react-icons/fa";
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import { MdHolidayVillage } from "react-icons/md";
+import { MdCabin } from "react-icons/md";
 
 
 const trans =() =>{
@@ -159,18 +161,22 @@ const sendRegistreDataMedecin = async (event: React.FormEvent<HTMLFormElement>) 
     const medecinEmailInput = document.getElementById('medecinEmail') as HTMLInputElement;
     const medecinPasswordInput = document.getElementById('medecinPassword') as HTMLInputElement;
     const confirmmedecinPasswordInput = document.getElementById('medecinConfirmpassword') as HTMLInputElement;
-    const documentInput = document.getElementById('document') as HTMLInputElement;
+    const villeInput = document.getElementById('ville') as HTMLInputElement;
+    const adresseInput = document.getElementById('adresse') as HTMLInputElement;
 
     const medecinName = medecinNameInput.value;
     const medecinNumber = medecinNumberInput.value;
     const medecinEmail = medecinEmailInput.value;
     const medecinPassword = medecinPasswordInput.value;
     const confirmmedecinPassword = confirmmedecinPasswordInput.value;
+    const ville = villeInput.value;
+    const adresse = adresseInput.value;
     
 
     let specValue = specChoice; // Pass your choice as an argument here
 
-    if (medecinName !== '' && medecinEmail !== '' && medecinPassword !== '' && medecinNumber !== '') {
+    if (medecinName !== '' && medecinEmail !== '' && medecinPassword !== '' && medecinNumber !== ''
+     && ville !== '' && adresse !== '') {
         if (confirmmedecinPassword === medecinPassword) {
             try {
                 const response = await fetch('http://localhost:3001/api/registreMedecin', {
@@ -184,6 +190,8 @@ const sendRegistreDataMedecin = async (event: React.FormEvent<HTMLFormElement>) 
                         email: medecinEmail,
                         password: medecinPassword,
                         spec: specValue, // Pass spec value here if needed
+                        ville: ville,
+                        adresse: adresse,
                     })
                 });
 
@@ -332,8 +340,13 @@ const sendRegistreDataMedecin = async (event: React.FormEvent<HTMLFormElement>) 
     <label htmlFor="password"><FaLock /></label>
     <input type="password" id='medecinConfirmpassword' placeholder='confirmez votre mot de pass' />
 </div>
-<div className='file'>
-    <input type="file" id='document' placeholder='envoyer votre certificat document' />
+<div className='ville'>
+<label htmlFor="password"><MdHolidayVillage /></label>
+    <input type="text" id='ville' placeholder='votre ville' />
+</div>
+<div className='adresse'>
+<label htmlFor="password"><MdCabin /></label>
+    <input type="text" id='adresse' placeholder='votre adresse' />
 </div>
 {wrong == true &&
 <h5 className="wrong">Le nom et le prenom deja exist.</h5>

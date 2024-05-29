@@ -1,15 +1,5 @@
-.ctn{
-    margin: 8vh 2vw;
 
-}
-.h2, .h3{
-    color: var(--main-color);
-    
-}
-.h2{
-    border-bottom: 2px solid var(--second-color);
 
-}
 .prochain{
     display: flex;
     gap: 10vw;

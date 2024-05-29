@@ -8,6 +8,11 @@ const info = require('./controllers/info');
 const getDoctorAppointmentsController = require('./controllers/appointmentController');
 const pendingAppointment = require('./controllers/pendingAppointment');
 const agenda = require('./controllers/agendaController');
+const updateRdv = require('./controllers/updateRdv');
+const services = require('./controllers/services');
+const fetchinfo = require('./controllers/fetchProfileinfo');
+const { getAppointments, bookAppointment } = require('./controllers/rdvServices');
+
 
 const adminPanel = require('./controllers/adminPanelController/adminPanelController');
 const adminPanelMedecin = require('./controllers/adminPanelController/adminPanelControllerMedecin');
@@ -31,6 +36,21 @@ router.get('/info', info);
 router.get('/api/appointments', getDoctorAppointmentsController);
 router.get('/api/pendingAppointment', pendingAppointment);
 router.get('/api/agenda', agenda);
+router.post('/api/decline', declineRdv);
+router.post('/api/accept', acceptRdv);
+router.get('/api/fetchinfo', fetchinfo);
+
+router.get('/api/patientRdv', patientRdv);
+
+router.get('/api/userType', userType);
+
+router.put('/api/updateRdv', updateRdv);
+
+router.get('/api/services' , services);
+
+router.get('/api/rdvServices', getAppointments);
+router.post('/api/rdvServices', bookAppointment);
+
 
 router.get('/api/adminPanel', adminPanel);
 router.get('/api/adminPanelMedecin', adminPanelMedecin);

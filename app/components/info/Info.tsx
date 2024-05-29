@@ -1,385 +1,115 @@
-"use client"
+"use client";
 
-import React from 'react'
-import Link from 'next/link'
-import Image from 'next/image'
-import './info.css'
-import anes from '../../../public/photo1678456791.jpeg'
-import { useState } from 'react'
+import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import './info.css';
+import anes from '../../../public/photo1678456791.jpeg';
 import { FaUserDoctor } from "react-icons/fa6";
 import { CiUser } from "react-icons/ci";
 
+interface User {
+  doctor_id: number;
+  patient_id: number;
+  appointment_id: number;
+  user_id: number;
+  username: string;
+  ville: string;
+  adresse: string;
+  email: string;
+  phone_number: string;
+  speciality: string;
+  date_time: string;
+  status: string;
+}
 
 function Info() {
-  
-    const [select, setSelect] = useState(1);
+  const [data, setData] = useState<User[]>([]);
+  const [select, setSelect] = useState(1);
 
-    
-    const display1 = () =>{
-        setSelect(1)
-        const one = document.getElementById('one');
-    const two = document.getElementById('two');
-    const three = document.getElementById('three');
-    const four = document.getElementById('four');
-    const five = document.getElementById('five');
-    if (one) {
-      one.style.backgroundColor = '#022550'
-    one.style.color = '#e6e6e6';
+  const fetchData = async () => {
+    try {
+      const res = await fetch('http://localhost:3001/api/fetchinfo', {
+        credentials: 'include' // Include credentials if necessary
+      });
+      if (!res.ok) {
+        throw new Error('Failed to fetch data');
+      }
+      const jsonData = await res.json();
+      setData(jsonData.profiledata); // Assuming the endpoint returns an object with profiledata
+    } catch (error) {
+      console.error('Error fetching data:', error);
     }
-    if (two) {
-        two.style.backgroundColor = 'transparent';
-        two.style.color = '#252525';
-        }
-        if (three) {
-          three.style.backgroundColor = 'transparent';
-          three.style.color = '#252525';
-          }
-          if (four) {
-            four.style.backgroundColor = 'transparent';
-            four.style.color = '#252525';
-            }
-            if (five) {
-                five.style.backgroundColor = 'transparent';
-                five.style.color = '#252525';
-                }
-    }
-    const display2 = () =>{
-        setSelect(2)
-        const one = document.getElementById('one');
-        const two = document.getElementById('two');
-        const three = document.getElementById('three');
-        const four = document.getElementById('four');
-    const five = document.getElementById('five');
-        if (two) {
-            two.style.backgroundColor = '#022550'
-          two.style.color = '#e6e6e6';
-          }
-          if (one) {
-            one.style.backgroundColor = 'transparent';
-            one.style.color = '#252525';
-            }
-            if (three) {
-              three.style.backgroundColor = 'transparent';
-              three.style.color = '#252525';
-              }
-              if (four) {
-                four.style.backgroundColor = 'transparent';
-                four.style.color = '#252525';
-                }
-                if (five) {
-                    five.style.backgroundColor = 'transparent';
-                    five.style.color = '#252525';
-                    }
-    }
-    const display3 = () =>{
-        setSelect(3)
-        const one = document.getElementById('one');
-        const two = document.getElementById('two');
-        const three = document.getElementById('three');
-        const four = document.getElementById('four');
-    const five = document.getElementById('five');
-        if (three) {
-            three.style.backgroundColor = '#022550'
-          three.style.color = '#e6e6e6';
-          }
-          if (one) {
-            one.style.backgroundColor = 'transparent';
-            one.style.color = '#252525';
-            }
-            if (two) {
-              two.style.backgroundColor = 'transparent';
-              two.style.color = '#252525';
-              }
-              if (four) {
-                four.style.backgroundColor = 'transparent';
-                four.style.color = '#252525';
-                }
-                if (five) {
-                    five.style.backgroundColor = 'transparent';
-                    five.style.color = '#252525';
-                    }
-    }
-    const display4 = () =>{
-        setSelect(4)
-        const one = document.getElementById('one');
-        const two = document.getElementById('two');
-        const three = document.getElementById('three');
-        const four = document.getElementById('four');
-    const five = document.getElementById('five');
-        if (four) {
-            four.style.backgroundColor = '#022550'
-          four.style.color = '#e6e6e6';
-          }
-          if (one) {
-            one.style.backgroundColor = 'transparent';
-            one.style.color = '#252525';
-            }
-            if (three) {
-              three.style.backgroundColor = 'transparent';
-              three.style.color = '#252525';
-              }
-              if (two) {
-                two.style.backgroundColor = 'transparent';
-                two.style.color = '#252525';
-                }
-                if (five) {
-                    five.style.backgroundColor = 'transparent';
-                    five.style.color = '#252525';
-                    }
-    }
-    const display5 = () =>{
-        setSelect(5)
-        const one = document.getElementById('one');
-        const two = document.getElementById('two');
-        const three = document.getElementById('three');
-        const four = document.getElementById('four');
-    const five = document.getElementById('five');
-        if (five) {
-            five.style.backgroundColor = '#022550'
-          five.style.color = '#e6e6e6';
-          }
-          if (one) {
-            one.style.backgroundColor = 'transparent';
-            one.style.color = '#252525';
-            }
-            if (three) {
-              three.style.backgroundColor = 'transparent';
-              three.style.color = '#252525';
-              }
-              if (four) {
-                four.style.backgroundColor = 'transparent';
-                four.style.color = '#252525';
-                }
-                if (two) {
-                    two.style.backgroundColor = 'transparent';
-                    two.style.color = '#252525';
-                    }
-    }
+  };
+
+  useEffect(() => {
+    fetchData(); // Call fetchData when the component mounts
+  }, []); // Empty dependency array means this effect runs only once after the initial render
+
+  useEffect(() => {
+    console.log(data); // Log data whenever it changes
+  }, [data]); // Run this effect whenever data changes
+
+  const handleSelect = (selection: number, buttonIds: string[]) => {
+    setSelect(selection);
+    buttonIds.forEach(id => {
+      const element = document.getElementById(id);
+      if (element) {
+        element.style.backgroundColor = selection.toString() === id.slice(-1) ? '#022550' : 'transparent';
+        element.style.color = selection.toString() === id.slice(-1) ? '#e6e6e6' : '#252525';
+      }
+    });
+  };
+
   return (
     <div>
       <div className='des'>
-            <ul>
-            <li><button onClick={display1} id='one'> Profile </button></li>
-                <li><button onClick={display2} id='two'> Note </button></li>
-                <li><button onClick={display3} id='three'> Favorite </button></li>
-                <li><button onClick={display4} id='four'> Historique </button></li>
-                <li><button onClick={display5} id='five'> Contact </button></li>
-                <li><button className='logout'> Log out </button></li>
-            </ul>
-       
-        </div>
-    <div className='all'>
-      <Link href='../../pages/chat' className='message'>prenez rendez vous</Link>
-        
-
-     <div className='info'>
-
-     {select === 1 && (
-
-
+        <ul>
+          <li><button onClick={() => handleSelect(1, ['one', 'two', 'four'])} id='one'>Profile</button></li>
+        </ul>
+      </div>
+      <div className='all'>
+        <div className='info'>
+          {select === 1 && (
             <div className='patientInfo'>
-                <ul>
-                <li>city: <li> bougara Blida </li> </li>
-                <li>gender: <li> male </li></li>
-                <li>blood: <li> o+ </li></li>
-                <li>danger sick: <li> nothing </li></li>
-                <li>optical: <li> rafik sahed </li></li>
-                </ul>
-                <ul>
-                <li>number: <li> 0674803439 </li></li>
-                <li>email: <li> anesamrane9@gmail.com </li></li>
-                <li>birthday: <li> 05/01/2002 </li></li>
-                <li>health situation: <li> stable </li></li>
-                </ul>
+              <ul>
+                {Array.isArray(data) && data.length > 0 ? (
+                  data.map((item, index) => (
+                    <li key={index}>
+                      <ul>
+                        <li>
+                          <span>nom et prenom:</span>
+                          <span className='information'> {item.username} </span>
+                        </li>
+                        <li>
+                          <span>speciality:</span>
+                          <span className='information'> {item.speciality} </span>
+                        </li>
+                        <li>
+                          <span>adress:</span>
+                          <span className='information'> {item.ville} {item.adresse} </span>
+                        </li>
+                        <li>
+                          <span>numero de telephone:</span>
+                          <span className='information'> {item.phone_number} </span>
+                        </li>
+                        <li>
+                          <span>email:</span>
+                          <span className='information'> {item.email} </span>
+                        </li>
+                      </ul>
+                    </li>
+                  ))
+                ) : (
+                  <li>No data available</li>
+                )}
+              </ul>
             </div>
-
-     )}
-
-
-
-
-{select === 2 && (
-
-
-<div className='patientInfo'>
-    <ul>
-    <li>Note: <li> Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta ipsum dolor doloribus facilis odit! Unde ducimus aperiam ad veniam ea quod dolore error amet, et aut reiciendis, expedita aspernatur hic? Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolore, aperiam quo at facilis modi voluptatum, id delectus quisquam dicta asperiores quasi natus molestiae incidunt dolor sint corrupti rerum. Inventore, earum.</li> </li>
-    </ul>
-</div>
-
-)}
-
-
-
-
-
-{select === 3 && (
-
-
-<div className='fav'>
-    <Link href='' className='card'>
-      <div className='userLogo'><FaUserDoctor /></div> {/* User logo */}
-      <div className='userInfo'>
-        <h4>Anes amrane</h4>
-        <p>dentist</p>
-      </div>
-    </Link>
-
-
-    <Link href='' className='card'>
-      <div className='userLogo'><FaUserDoctor /></div> {/* User logo */}
-      <div className='userInfo'>
-        <h4>Rafik sahed</h4>
-        <p>psychologue</p>
-      </div>
-    </Link>
-
-
-
-    <Link href='' className='card'>
-      <div className='userLogo'><FaUserDoctor /></div> {/* User logo */}
-      <div className='userInfo'>
-        <h4>Djeghab kacem yacine</h4>
-        <p>cardialogue</p>
-      </div>
-    </Link>
-</div>
-
-)}
-
-
-
-
-
-
-{select === 4 && (
-
-
-<div className='his'>
-    <Link href='' className='card'>
-      <div className='userLogo'><FaUserDoctor /></div> {/* User logo */}
-      <div className='userInfo'>
-        <h4>Anes amrane</h4>
-        <p>dentist</p>
-        <p>15:34 Am</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-           Debitis architecto ex eius maiores sapiente reiciendis vitae perspiciatis culpa eveniet, 
-           optio repellat inventore asperiores expedita 
-          accusamus exercitationem assumenda quam ullam mollitia?</p>
-      </div>
-    </Link>
-
-
-    <Link href='' className='card'>
-      <div className='userLogo'><FaUserDoctor /></div> {/* User logo */}
-      <div className='userInfo'>
-        <h4>Rafik sahed</h4>
-        <p>psychologue</p>
-        <p>15:34 Am</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-           Debitis architecto ex eius maiores sapiente reiciendis vitae perspiciatis culpa eveniet, 
-           optio repellat inventore asperiores expedita 
-          accusamus exercitationem assumenda quam ullam mollitia?</p>
-      </div>
-    </Link>
-
-
-
-    <Link href='' className='card'>
-      <div className='userLogo'><FaUserDoctor /></div> {/* User logo */}
-      <div className='userInfo'>
-        <h4>Djeghab kacem yacine</h4>
-        <p>cardialogue</p>
-        <p>15:34 Am</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-           Debitis architecto ex eius maiores sapiente reiciendis vitae perspiciatis culpa eveniet, 
-           optio repellat inventore asperiores expedita 
-          accusamus exercitationem assumenda quam ullam mollitia?</p>
-      </div>
-    </Link>
-
-
-
-    <Link href='' className='card'>
-      <div className='userLogo'><FaUserDoctor /></div> {/* User logo */}
-      <div className='userInfo'>
-        <h4>Djeghab kacem yacine</h4>
-        <p>cardialogue</p>
-        <p>15:34 Am</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-           Debitis architecto ex eius maiores sapiente reiciendis vitae perspiciatis culpa eveniet, 
-           optio repellat inventore asperiores expedita 
-          accusamus exercitationem assumenda quam ullam mollitia?</p>
-      </div>
-    </Link>
-
-
-
-
-
-    <Link href='' className='card'>
-      <div className='userLogo'><FaUserDoctor /></div> {/* User logo */}
-      <div className='userInfo'>
-        <h4>Djeghab kacem yacine</h4>
-        <p>cardialogue</p>
-        <p>15:34 Am</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-           Debitis architecto ex eius maiores sapiente reiciendis vitae perspiciatis culpa eveniet, 
-           optio repellat inventore asperiores expedita 
-          accusamus exercitationem assumenda quam ullam mollitia?</p>
-      </div>
-    </Link>
-</div>
-
-)}
-
-
-
-
-
-
-
-
-{select === 5 && (
-
-
-<div className='fav'>
-    <Link href='' className='card'>
-      <div className='userLogo'><FaUserDoctor /></div> {/* User logo */}
-      <div className='userInfo'>
-        <h4>Anes amrane</h4>
-        <p>dentist</p>
-      </div>
-    </Link>
-
-
-    <Link href='' className='card'>
-      <div className='userLogo'><FaUserDoctor /></div> {/* User logo */}
-      <div className='userInfo'>
-        <h4>Rafik sahed</h4>
-        <p>psychologue</p>
-      </div>
-    </Link>
-
-
-
-    <Link href='' className='card'>
-      <div className='userLogo'><FaUserDoctor /></div> {/* User logo */}
-      <div className='userInfo'>
-        <h4>Djeghab kacem yacine</h4>
-        <p>cardialogue</p>
-      </div>
-    </Link>
-</div>
-
-)}
-
-
+          )}
         </div>
+      </div>
     </div>
-    </div>
-      
-  )
+  );
 }
 
-export default Info
+export default Info;

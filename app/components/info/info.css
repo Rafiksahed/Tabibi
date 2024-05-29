@@ -118,7 +118,7 @@
     list-style: none;
     line-height: 7vh;
 }
-.patientInfo ul li li{
+.patientInfo ul li .information{
     font-weight: bold;
     margin-top: -2vh;
 }
