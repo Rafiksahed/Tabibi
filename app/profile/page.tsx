@@ -9,10 +9,12 @@ import { useState } from 'react'
 import Info from '../components/info/Info'
 import Nav from '../components/nav'
 import Footer from '../components/footer'
+import Swal from 'sweetalert2';
 
 function page() {
 
     return (
+        
         <div>
             <Nav />
         <Info />

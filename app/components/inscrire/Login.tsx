@@ -13,6 +13,9 @@ import { IoMdReturnLeft } from "react-icons/io";
 import { FaLock } from "react-icons/fa";
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import { MdHolidayVillage } from "react-icons/md";
+import { MdCabin } from "react-icons/md";
+import Swal from 'sweetalert2';
 
 
 const trans =() =>{
@@ -57,7 +60,8 @@ const trans2 =() =>{
 }
     }
 
-    const choix = () =>{
+    const choix = (event: React.FormEvent<HTMLFormElement>) =>{
+        event.preventDefault();
         const specialitepage = document.querySelector('.specialitepage') as HTMLElement | null;
         const myloginpage = document.getElementById('choix');
 
@@ -119,7 +123,6 @@ function Login() {
                     });
     
                     if (!response.ok) {
-                        setWrong(true)
                         throw new Error('Failed to register');
                     } 
     
@@ -128,6 +131,8 @@ function Login() {
                     sessionStorage.setItem('loggedInUser', JSON.stringify(responseData.user));
                     console.log('Logged in user:', responseData.user);
                     location.href = `./pPage/?username=${responseData.user}`;
+
+                    
                     // Optionally, redirect the user to another page or perform other actions
                 } catch (error) {
                     console.error('Error registering:', error);
@@ -151,6 +156,14 @@ const spec = (choice: string) => {
     return choice;
 }
 
+const showAlert = () => {
+    Swal.fire({
+        title: 'votre compte est cree',
+      text: 'i faut attend 24 heur pour confirmer votre inscription',
+      icon: 'success',
+      confirmButtonText: 'ok'
+    });
+  };
 const sendRegistreDataMedecin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const medecinNameInput = document.getElementById('medecinName') as HTMLInputElement;
@@ -158,16 +171,22 @@ const sendRegistreDataMedecin = async (event: React.FormEvent<HTMLFormElement>) 
     const medecinEmailInput = document.getElementById('medecinEmail') as HTMLInputElement;
     const medecinPasswordInput = document.getElementById('medecinPassword') as HTMLInputElement;
     const confirmmedecinPasswordInput = document.getElementById('medecinConfirmpassword') as HTMLInputElement;
+    const villeInput = document.getElementById('ville') as HTMLInputElement;
+    const adresseInput = document.getElementById('adresse') as HTMLInputElement;
 
     const medecinName = medecinNameInput.value;
     const medecinNumber = medecinNumberInput.value;
     const medecinEmail = medecinEmailInput.value;
     const medecinPassword = medecinPasswordInput.value;
     const confirmmedecinPassword = confirmmedecinPasswordInput.value;
+    const ville = villeInput.value;
+    const adresse = adresseInput.value;
+    
 
-    const specValue = specChoice; // Pass your choice as an argument here
+    let specValue = specChoice; // Pass your choice as an argument here
 
-    if (medecinName !== '' && medecinEmail !== '' && medecinPassword !== '' && medecinNumber !== '') {
+    if (medecinName !== '' && medecinEmail !== '' && medecinPassword !== '' && medecinNumber !== ''
+     && ville !== '' && adresse !== '') {
         if (confirmmedecinPassword === medecinPassword) {
             try {
                 const response = await fetch('http://localhost:3001/api/registreMedecin', {
@@ -180,7 +199,9 @@ const sendRegistreDataMedecin = async (event: React.FormEvent<HTMLFormElement>) 
                         number: medecinNumber,
                         email: medecinEmail,
                         password: medecinPassword,
-                        spec: specValue // Pass spec value here if needed
+                        spec: specValue, // Pass spec value here if needed
+                        ville: ville,
+                        adresse: adresse,
                     })
                 });
 
@@ -193,7 +214,17 @@ const sendRegistreDataMedecin = async (event: React.FormEvent<HTMLFormElement>) 
                 // Save the user data in session storage
                 sessionStorage.setItem('loggedInUser', JSON.stringify(responseData.user));
                 console.log('Logged in user:', responseData.user);
-                location.href = `./mPage/?username=${responseData.user}`;
+                Swal.fire({
+                    title: 'bonjour a tabibi',
+                    text: 'il faut attend 24 heure pour accepter votre demande',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                      // Perform the action you want when OK is clicked
+                      location.href = `./pPage/?username=${responseData.user}`;
+                    }
+                  });
                 // Optionally, redirect the user to another page or perform other actions
             } catch (error) {
                 console.error('Error registering:', error);
@@ -264,7 +295,7 @@ const sendRegistreDataMedecin = async (event: React.FormEvent<HTMLFormElement>) 
     <input type="password" id='patientConfirmpassword' placeholder='confirmez votre mot de pass' />
 </div>
 {wrong == true &&
-<h5 className="wrong">Le nom et le prenom deja exist.</h5>
+<h5 className="wrong">username ou bien l'email deja exist.</h5>
 }
 {confPass == false &&
 <h5 className="wrong">Les mots de passe ne correspondent pas.</h5>
@@ -328,8 +359,16 @@ const sendRegistreDataMedecin = async (event: React.FormEvent<HTMLFormElement>) 
     <label htmlFor="password"><FaLock /></label>
     <input type="password" id='medecinConfirmpassword' placeholder='confirmez votre mot de pass' />
 </div>
+<div className='ville'>
+<label htmlFor="password"><MdHolidayVillage /></label>
+    <input type="text" id='ville' placeholder='votre ville' />
+</div>
+<div className='adresse'>
+<label htmlFor="password"><MdCabin /></label>
+    <input type="text" id='adresse' placeholder='votre adresse' />
+</div>
 {wrong == true &&
-<h5 className="wrong">Le nom et le prenom deja exist.</h5>
+<h5 className="wrong">username ou bien l'email deja exist</h5>
 }
 {confPass == false &&
 <h5 className="wrong">Les mots de passe ne correspondent pas.</h5>

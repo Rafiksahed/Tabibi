@@ -1,0 +1,63 @@
+.sideBar{
+    width: 15%;
+    height: 100vh;
+    background-color: #022550;
+    position: fixed;
+}
+.sideBar *{
+    
+}
+.sideBar h3{
+    color: #fff;
+    margin-bottom: 5vh;
+    padding: 5vh;
+}
+.sideBar a{
+    color: #fff;
+    display: flex;
+    padding: 2vh;
+    width: 100%;
+    padding-left: 5vh;
+    transition: 0.3s;
+}
+.sideBar a:hover{
+    background-color: #30537e;
+}
+
+.table td,
+.table th {
+  padding: 3vh;
+  text-align: center;
+}
+
+.table {
+  width: 85%;
+  padding: 5vh;
+  min-height: 100vh;
+  background-color: #e6e6e6;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.table button{
+    padding: 2vh;
+    cursor: pointer;
+    background-color: #e44949;
+    color: #fff;
+    border: none;
+    transition: 0.3s;
+}
+.table button:hover{
+    background-color: red;
+}
+.table .accepted{
+    padding: 2vh;
+    cursor: pointer;
+    background-color: #3eda45;
+    color: #fff;
+    border: none;
+    transition: 0.3s;
+}
+.table .accepted:hover{
+    background-color: #218b27;
+}

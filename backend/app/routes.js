@@ -8,14 +8,30 @@ const info = require('./controllers/info');
 const getDoctorAppointmentsController = require('./controllers/appointmentController');
 const pendingAppointment = require('./controllers/pendingAppointment');
 const agenda = require('./controllers/agendaController');
+const updateRdv = require('./controllers/updateRdv');
+const services = require('./controllers/services');
+const fetchinfo = require('./controllers/fetchProfileinfo');
+const { getAppointments, bookAppointment } = require('./controllers/rdvServices');
+
+
+const adminPanel = require('./controllers/adminPanelController/adminPanelController');
+const adminPanelMedecin = require('./controllers/adminPanelController/adminPanelControllerMedecin');
+const adminPanelMedecinStatus = require('./controllers/adminPanelController/adminPanelMedecinStatus');
+const adminPanelPatient = require('./controllers/adminPanelController/adminPanelControllerPatient');
+const deleteUser = require('./controllers/adminPanelController/deleteUser');
+const adminPanelAppointement = require('./controllers/adminPanelController/adminPanelAppointement');
+const adminAcceptMedecin = require('./controllers/adminPanelController/adminAcceptMedecin');
+
 const acceptRdv = require('./controllers/acceptRdv');
 const declineRdv = require('./controllers/declineRdv');
 const patientRdv = require('./controllers/patienRdv');
 const userType = require('./controllers/userTypeController');
+
 const updateRdv = require('./controllers/updateRdv');
 const services = require('./controllers/services');
 const { getAppointments, bookAppointment } = require('./controllers/rdvServices');
 const messagesController = require('./controllers/messagerie');
+
 
 const patientMessageController = require('./controllers/patientMessage');
 
@@ -33,6 +49,7 @@ router.get('/api/pendingAppointment', pendingAppointment);
 router.get('/api/agenda', agenda);
 router.post('/api/decline', declineRdv);
 router.post('/api/accept', acceptRdv);
+router.get('/api/fetchinfo', fetchinfo);
 
 router.get('/api/patientRdv', patientRdv);
 
@@ -44,6 +61,7 @@ router.get('/api/services' , services);
 
 router.get('/api/rdvServices', getAppointments);
 router.post('/api/rdvServices', bookAppointment);
+
 
 
 // Routes for messaging
@@ -66,6 +84,24 @@ router.post('/api/patient/conversations', patientMessageController.createConvers
 // Route to get doctor user_id
 router.get('/api/doctor/user', doctorController.getDoctorUserId);
 router.get('/api/patient/user', patientIDController.getPatientUserId);
+
+router.get('/api/adminPanel', adminPanel);
+router.get('/api/adminPanelMedecin', adminPanelMedecin);
+router.get('/api/adminPanelMedecinStatus', adminPanelMedecinStatus);
+router.get('/api/adminPanelPatient', adminPanelPatient);
+router.delete('/api/deleteUser', deleteUser);
+router.get('/api/adminPanelAppointement', adminPanelAppointement);
+router.put('/api/adminAcceptMedecin', adminAcceptMedecin);
+
+
+
+router.post('/api/decline', declineRdv);
+router.post('/api/accept', acceptRdv);
+
+router.get('/api/patientRdv', patientRdv);
+
+router.get('/api/userType', userType);
+
 
 
 module.exports = router;

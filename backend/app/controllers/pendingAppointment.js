@@ -9,11 +9,13 @@ module.exports = (req, res) => {
     const doctorId = req.session.user.doctor_id;
 
     const sql = `
-        SELECT rv.appointment_id, p.username AS patient_name, rv.date_time
-        FROM rendez_vous rv
-        INNER JOIN patients p ON rv.patient_id = p.patient_id
-        WHERE rv.doctor_id = ? AND rv.status = 'attente'
-        ORDER BY rv.date_time ASC
+    SELECT rv.appointment_id, patients.username, rv.date_time, u.email, u.phone_number
+    FROM rendez_vous rv
+    INNER JOIN patients ON rv.patient_id = patients.patient_id
+    INNER JOIN users u ON patients.user_id = u.user_id
+    WHERE rv.doctor_id = ? AND rv.status = 'attente'
+    ORDER BY rv.date_time ASC;
+    
     `;
     const values = [doctorId];
 

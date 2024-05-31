@@ -46,7 +46,7 @@
 /* this cause the icon erreur */
 
 .patientmain .myloginpage *{
-    margin-top: 2vh;
+    margin-top: 1vh;
 }
 /*-----------------*/
 .patientmain .myloginpage label{
@@ -141,7 +141,7 @@
 /* this cause the icon erreur */
 
 .medecinmain .myloginpage *{
-    margin-top: 2vh;
+    margin-top: 1vh;
 }
 /*-----------------*/
 .medecinmain .myloginpage label{
@@ -149,7 +149,7 @@
     left: 30px;
     top: 3px;
 }
-.medecinmain .myloginpage input{
+.medecinmain .myloginpage input:not(.file){
     width: 30%;
     height: 2vh;
     padding: 3vh 3vh 3vh 8vh;
@@ -270,4 +270,9 @@
     position: absolute;
     top: 2vh;
     right: 11vh;
+}
+
+.file{
+    background-color: #fff;
+
 }

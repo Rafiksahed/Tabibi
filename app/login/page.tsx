@@ -96,7 +96,7 @@ function page() {
     // Define a variable to hold the login data
 let loggedInUser = null;
 
-const sendLoginData = async (event) => {
+const sendLoginData = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const patientEmailInput = document.getElementById('patientEmail');
     const patientPasswordInput = document.getElementById('patientPassword');
@@ -104,6 +104,7 @@ const sendLoginData = async (event) => {
     const patientEmail = patientEmailInput.value;
     const patientPassword = patientPasswordInput.value;
 
+ 
     try {
         const response = await fetch('http://localhost:3001/api/login', {
             method: 'POST',
@@ -119,11 +120,15 @@ const sendLoginData = async (event) => {
 
         if (!response.ok) {
             throw new Error('Failed to login');
+            
         }
 
         const responseData = await response.json();
         // Redirection en fonction du type d'utilisateur
-        if (responseData.userType === 'medecin') {
+        console.log(responseData.username)
+        if (responseData.username === 'admin') {
+            window.location.href = `/admin?user_name=${responseData.username}`;
+        } else if (responseData.userType === 'medecin') {
             window.location.href = `/mPage?user_name=${responseData.username}`;
         } else if (responseData.userType === 'patient') {
             window.location.href = `/pPage?user_name=${responseData.username}`;
@@ -132,6 +137,7 @@ const sendLoginData = async (event) => {
         }
     } catch (error) {
         console.error('Error logging in:', error);
+        setWrong(true)
     }
 };
 

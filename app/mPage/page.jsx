@@ -8,6 +8,9 @@ import Mult from './multi/mult';
 import Footer from '../components/footer';
 
 function MPage() {
+
+
+    
     
     
     return (

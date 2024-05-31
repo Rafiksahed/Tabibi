@@ -89,7 +89,9 @@ function Confirm() {
                     <li key={appointment.appointment_id} className={styles.element}>
                         <div className={styles.ctn}>
                             <h3 className={styles.h}>le {formatDateTime(appointment.date_time)} h</h3>
-                            <p>{appointment.patient_name}</p>
+                            <p>{appointment.username}</p>
+                            <p>{appointment.email}</p>
+                            <p>{appointment.phone_number}</p>
                         </div>
                         <button className={styles.confirm} onClick={() => handleConfirmAppointment(appointment.appointment_id)}>Confirmer</button>
                         <button className={styles.decline} onClick={() => handleDeclineAppointment(appointment.appointment_id)}>Décliner</button>

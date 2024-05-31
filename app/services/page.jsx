@@ -7,9 +7,12 @@ import Image from 'next/image';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { HiChevronUpDown } from "react-icons/hi2";
+import Link from 'next/link';
+import Swal from 'sweetalert2';
 
 function Page() {
   const [doctors, setDoctors] = useState([]);
+  const [type, setType] = useState([]);
   const [selectedDoctorId, setSelectedDoctorId] = useState(null);
   const [appointments, setAppointments] = useState([]);
   const [selectedOption, setSelectedOption] = useState('all');
@@ -26,6 +29,26 @@ function Page() {
     setDoctors(data.doctors);
     setFilteredDoctors(data.doctors);
   };
+
+  const userType = async () => {
+    try {
+      const res = await fetch('http://localhost:3001/api/userType');
+      const data = await res.json();
+      setType(data);
+      console.log(data);
+      console.log(data.userType);
+  
+      if (data.userType === 'medecin') {
+        Swal.fire({
+          text: 'Il faut créer un compte patient pour prendre un rendez-vous',
+          confirmButtonText: 'OK'
+        });
+      }
+    } catch (error) {
+      console.error('Error fetching user type:', error);
+    }
+  };
+  
 
   const fetchAppointments = async (doctorId) => {
     const res = await fetch(`http://localhost:3001/api/rdvServices?doctorId=${doctorId}`);
@@ -57,6 +80,8 @@ function Page() {
     }
 
     setFilteredDoctors(filteredData);
+    console.log(filteredData);
+    console.log("zbal w 5lasses");
   };
 
   const bookAppointment = async (doctorId, selectedDate, selectedTime) => {
@@ -99,8 +124,13 @@ function Page() {
 
       const data = await res.json();
       if (data.success) {
-        alert('Appointment booked successfully!');
         await fetchAppointments(doctorId); // Rafraîchir les rendez-vous
+        Swal.fire({
+          text: 'Appointment booked successfully!',
+          icon: 'success',
+          confirmButtonText: 'ok'
+        });
+
         setError(''); // Réinitialiser les erreurs après le succès
       } else {
         setError('Failed to book appointment: ' + data.message);
@@ -110,10 +140,20 @@ function Page() {
     }
   };
 
+  const showAlert = () => {
+    Swal.fire({
+      text: 'il faut cree un compte patient pou prendre un rendez vouz',
+      confirmButtonText: 'ok'
+    });
+  };
+
+
   useEffect(() => {
     fetchDoctors();
   }, []);
-
+  useEffect(() => {
+    userType();
+  }, []);
   useEffect(() => {
     if (selectedDoctorId) {
       fetchAppointments(selectedDoctorId);
@@ -179,9 +219,17 @@ function Page() {
         <select name="filter" id="filter" onChange={handleFilterChange} value={selectedOption} className={styles.selectFilter}>
           <option value="all">all</option>
           <option value="cardiologue">Cardiologue</option>
-          <option value="dentiste">Dentiste</option>
-          <option value="generaliste">Généraliste</option>
-          <option value="orthopedics">Orthopédie</option>
+          <option value="Dermatology">Dermatology</option>
+          <option value="Orthopedics">Orthopedics</option>
+          <option value="Gastroenterology">Gastroenterology</option>
+          <option value="Ophthalmology">Ophthalmology</option>
+          <option value="Obstetrics">Obstetrics</option>
+          <option value="Pediatrics">Pediatrics</option>
+          <option value="Psychiatry">Psychiatry</option>
+          <option value="Oncology">Oncology</option>
+          <option value="Dentiste">Dentiste</option>
+          <option value="generaliste">generaliste</option>
+          <option value="Psychiatre">Psychiatre</option>
         </select>
         <HiChevronUpDown />
         </div>
@@ -189,6 +237,7 @@ function Page() {
 
       {/* Affichage des médecins */}
       <div>
+        
         {filteredDoctors.map((doctor) => (
           <DoctorCard
             key={doctor.doctor_id}
@@ -235,10 +284,18 @@ const DoctorCard = ({
     }
   };
 
+
+
+
+
+  
+
+
+
   return (
     <div className={styles.card}>
       <div className={styles.cardContent}>
-        <h2 className={styles.username}>{doctor.username}</h2>
+        <h2 className={styles.username}><Link href={`/profile?user_name=${doctor.username}`}> {doctor.username} </Link></h2>
         <p className={styles.spec}><b>specialité : {doctor.speciality}</b></p>
         <h4 className={styles.ville}>Ville : {doctor.ville}</h4>
         <p className={styles.adr}>adresse du cabinet : {doctor.adresse}</p>
