@@ -27,9 +27,7 @@ const declineRdv = require('./controllers/declineRdv');
 const patientRdv = require('./controllers/patienRdv');
 const userType = require('./controllers/userTypeController');
 
-const updateRdv = require('./controllers/updateRdv');
-const services = require('./controllers/services');
-const { getAppointments, bookAppointment } = require('./controllers/rdvServices');
+
 const messagesController = require('./controllers/messagerie');
 
 
