@@ -1,7 +1,21 @@
 const connection = require('../../db');
 
 
+
+
 const adminPanelPatient = (req, res) => {
+
+    if (!req.session.user) {
+        return res.status(401).json({ success: false, message: 'Unauthorized access' });
+    }
+    
+    
+    const doctorId = req.session.user.doctor_id
+    const username = req.session.user.username
+    const email = req.session.user.email
+    console.log(email, username)
+    if(email=='admintabibi@gmail.com' && username == 'admin'){
+        
     const sql = "SELECT * FROM patients";
 
     connection.query(sql, (err, results) => {
@@ -16,7 +30,7 @@ const adminPanelPatient = (req, res) => {
     });
 };
 
-
+}
 
 
 module.exports = adminPanelPatient;

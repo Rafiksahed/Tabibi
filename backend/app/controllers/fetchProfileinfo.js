@@ -1,7 +1,6 @@
 const connection = require('../db');
 
 const fetchinfo = (req, res) => {
-    // Check if the user is authenticated and has a doctor_id
     if (!req.session.user) {
         return res.status(401).json({ success: false, message: 'Unauthorized access' });
     }

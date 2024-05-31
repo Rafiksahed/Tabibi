@@ -104,9 +104,7 @@ const sendLoginData = async (event: React.FormEvent<HTMLFormElement>) => {
     const patientEmail = patientEmailInput.value;
     const patientPassword = patientPasswordInput.value;
 
- if (patientEmail == 'admin@gmail.com' && patientPassword == 'adminadmin'){
-        location.href = '/admin';
-    }
+ 
     try {
         const response = await fetch('http://localhost:3001/api/login', {
             method: 'POST',
@@ -122,11 +120,15 @@ const sendLoginData = async (event: React.FormEvent<HTMLFormElement>) => {
 
         if (!response.ok) {
             throw new Error('Failed to login');
+            
         }
 
         const responseData = await response.json();
         // Redirection en fonction du type d'utilisateur
-        if (responseData.userType === 'medecin') {
+        console.log(responseData.username)
+        if (responseData.username === 'admin') {
+            window.location.href = `/admin?user_name=${responseData.username}`;
+        } else if (responseData.userType === 'medecin') {
             window.location.href = `/mPage?user_name=${responseData.username}`;
         } else if (responseData.userType === 'patient') {
             window.location.href = `/pPage?user_name=${responseData.username}`;
@@ -135,6 +137,7 @@ const sendLoginData = async (event: React.FormEvent<HTMLFormElement>) => {
         }
     } catch (error) {
         console.error('Error logging in:', error);
+        setWrong(true)
     }
 };
 

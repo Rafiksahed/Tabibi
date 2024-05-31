@@ -15,6 +15,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { MdHolidayVillage } from "react-icons/md";
 import { MdCabin } from "react-icons/md";
+import Swal from 'sweetalert2';
 
 
 const trans =() =>{
@@ -122,7 +123,6 @@ function Login() {
                     });
     
                     if (!response.ok) {
-                        setWrong(true)
                         throw new Error('Failed to register');
                     } 
     
@@ -131,6 +131,8 @@ function Login() {
                     sessionStorage.setItem('loggedInUser', JSON.stringify(responseData.user));
                     console.log('Logged in user:', responseData.user);
                     location.href = `./pPage/?username=${responseData.user}`;
+
+                    
                     // Optionally, redirect the user to another page or perform other actions
                 } catch (error) {
                     console.error('Error registering:', error);
@@ -154,6 +156,14 @@ const spec = (choice: string) => {
     return choice;
 }
 
+const showAlert = () => {
+    Swal.fire({
+        title: 'votre compte est cree',
+      text: 'i faut attend 24 heur pour confirmer votre inscription',
+      icon: 'success',
+      confirmButtonText: 'ok'
+    });
+  };
 const sendRegistreDataMedecin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const medecinNameInput = document.getElementById('medecinName') as HTMLInputElement;
@@ -204,7 +214,17 @@ const sendRegistreDataMedecin = async (event: React.FormEvent<HTMLFormElement>) 
                 // Save the user data in session storage
                 sessionStorage.setItem('loggedInUser', JSON.stringify(responseData.user));
                 console.log('Logged in user:', responseData.user);
-                location.href = `./mPage/?username=${responseData.user}`;
+                Swal.fire({
+                    title: 'bonjour a tabibi',
+                    text: 'il faut attend 24 heure pour accepter votre demande',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                      // Perform the action you want when OK is clicked
+                      location.href = `./pPage/?username=${responseData.user}`;
+                    }
+                  });
                 // Optionally, redirect the user to another page or perform other actions
             } catch (error) {
                 console.error('Error registering:', error);
@@ -276,7 +296,7 @@ const sendRegistreDataMedecin = async (event: React.FormEvent<HTMLFormElement>) 
     <input type="password" id='patientConfirmpassword' placeholder='confirmez votre mot de pass' />
 </div>
 {wrong == true &&
-<h5 className="wrong">Le nom et le prenom deja exist.</h5>
+<h5 className="wrong">username ou bien l'email deja exist.</h5>
 }
 {confPass == false &&
 <h5 className="wrong">Les mots de passe ne correspondent pas.</h5>
@@ -349,7 +369,7 @@ const sendRegistreDataMedecin = async (event: React.FormEvent<HTMLFormElement>) 
     <input type="text" id='adresse' placeholder='votre adresse' />
 </div>
 {wrong == true &&
-<h5 className="wrong">Le nom et le prenom deja exist.</h5>
+<h5 className="wrong">username ou bien l'email deja exist</h5>
 }
 {confPass == false &&
 <h5 className="wrong">Les mots de passe ne correspondent pas.</h5>

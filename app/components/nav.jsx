@@ -34,7 +34,7 @@ const NavMedecin = ({ handleLogout }) => (
     </Link>
     <ul className={styles.links}>
         <li className={styles.Link}><Link  href="/mPage">Mes Rendez-vous</Link></li>
-        <li className={styles.Link} id={styles.ligne}><Link  href="#">Contact</Link></li>
+        <li className={styles.Link} id={styles.ligne}><Link  href="/services">Prendre un rendez-vous</Link></li>
         <li className={styles.Link} ><Link  href="/profile">Profile</Link></li>
         <li className={styles.button}><Link  href="./login"><button onClick={handleLogout}>Logout</button></Link></li>
     </ul>

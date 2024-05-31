@@ -46,7 +46,7 @@
 /* this cause the icon erreur */
 
 .patientmain .myloginpage *{
-    margin-top: 2vh;
+    margin-top: 1vh;
 }
 /*-----------------*/
 .patientmain .myloginpage label{
@@ -141,7 +141,7 @@
 /* this cause the icon erreur */
 
 .medecinmain .myloginpage *{
-    margin-top: 2vh;
+    margin-top: 1vh;
 }
 /*-----------------*/
 .medecinmain .myloginpage label{

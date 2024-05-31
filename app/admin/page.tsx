@@ -17,6 +17,7 @@ interface User {
   status: string;
   ville: string;
   adresse: string;
+  nom: string;
   // Define other properties here
 }
 
@@ -50,21 +51,25 @@ function Page() {
   console.log(select);
   const fetchData = async () => {
     try {
-      const url = 'http://localhost:3001/api/adminPanel';
-      const res = await fetch(url);
+      const res = await fetch ('http://localhost:3001/api/adminPanel',{
+        credentials: 'include'
+      });
       if (!res.ok) {
         throw new Error('Failed to fetch data');
+        
       }
       const jsonData = await res.json();
       setData(jsonData.data);
     } catch (error) {
       console.error('Error fetching data:', error);
+      location.href = '/'
     }
   };
   const fetchDataMedecin = async () => {
     try {
-      const url = 'http://localhost:3001/api/adminPanelMedecin';
-      const res = await fetch(url);
+      const res = await fetch ('http://localhost:3001/api/adminPanelMedecin',{
+        credentials: 'include'
+      });
       if (!res.ok) {
         throw new Error('Failed to fetch data');
       }
@@ -78,8 +83,9 @@ function Page() {
 
   const fetchDataMedecinStatus = async () => {
     try {
-      const url = 'http://localhost:3001/api/adminPanelMedecinStatus';
-      const res = await fetch(url);
+      const res =await fetch ('http://localhost:3001/api/adminPanelMedecinStatus',{
+        credentials: 'include'
+      });
       if (!res.ok) {
         throw new Error('Failed to fetch data');
       }
@@ -92,8 +98,9 @@ function Page() {
 
   const fetchDataPatient = async () => {
     try {
-      const url = 'http://localhost:3001/api/adminPanelPatient';
-      const res = await fetch(url);
+      const res = await fetch('http://localhost:3001/api/adminPanelPatient',{
+        credentials: 'include'
+      });
       if (!res.ok) {
         throw new Error('Failed to fetch data');
       }
@@ -107,8 +114,9 @@ function Page() {
 
   const fetchDataAppointement = async () => {
     try {
-      const url = 'http://localhost:3001/api/adminPanelAppointement';
-      const res = await fetch(url);
+      const res = await fetch ('http://localhost:3001/api/adminPanelAppointement',{
+        credentials: 'include'
+      });
       if (!res.ok) {
         throw new Error('Failed to fetch data');
       }
@@ -223,6 +231,9 @@ function Page() {
           <li>
             <Link href="" onClick={() => spec('aprove')}>Aprove Medecin</Link>
           </li>
+          <li>
+            <Link href="/">acceuil</Link>
+          </li>
         </ul>
       </div>
 
@@ -243,6 +254,7 @@ function Page() {
           {data.map((item, index) => (
             <tr key={index}>
               <td>{item.user_id}</td>
+              <td>{item.nom}</td>
               <td>{item.username}</td>
               <td>{item.email}</td>
               <td>{item.phone_number}</td>
