@@ -41,8 +41,8 @@ export default function Home() {
             <Image 
               src="/img/main.png"
               alt="image medecin"
-              width={450}
-              height={360}
+              width={550}
+              height={450}
             />
          </div>
        </div>

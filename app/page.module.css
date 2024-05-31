@@ -1,7 +1,7 @@
 
                      /*ACCUEIL*/
 .accueil{
-    height: 65vh;
+    height: 55vh;
     display: flex;
     justify-content: space-between;
     background-color: var(--main-color);
@@ -37,7 +37,8 @@
     position: absolute;
     bottom: 0;
     right: 0; 
-    padding-right: 5%;
+    padding-right: 10%;
+    
 }
                          /*CARD*/
 .parent{

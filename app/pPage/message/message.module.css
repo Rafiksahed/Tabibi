@@ -1,5 +1,103 @@
-.message{
-    background-color: grey;
-    margin-top: 10vh;
-    height: 40vh;
+.messagingContainer {
+  margin-top: 2%;
+  margin-left: 5%;
+  margin-bottom: 10%;
+  display: flex;
+  width: 80%;
+
+}
+
+.doctorList li {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid var(--third-color);
+}
+
+.doctorList li:hover {
+  background-color: var(--third-color);
+}
+
+.selectedDoctor {
+  background-color: var(--main-color);
+  color: white;
+}
+
+.doctorList {
+  width: 40%;
+}
+
+.messageArea {
+  width: 70%;
+
+}
+
+.messages {
+  overflow-y: auto;
+  padding: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  height: 50%;
+  flex-direction: column-reverse; 
+  border: 1px solid #f1F1F1;
+  /* Inverse l'ordre des messages */
+  height: 40vh;
+}
+
+.message {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 70%;
+  word-wrap: break-word;
+  width: fit-content;
+}
+
+.message.patient {
+  background-color: var(--main-color);
+  color: white;
+  margin-left: auto;
+  text-align: right;
+}
+
+.message.doctor {
+  background-color: #f1f1f1;
+  text-align: left;
+}
+
+.newMessage {
+  display: flex;
+  align-items: center;
+}
+
+.newMessage input {
+  all: unset;
+  background-color: #f1f1f1;
+  border-radius: 15px;
+  width: 40%;
+  padding: 10px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+.newMessage input::placeholder {
+  font-size: 0.8rem;
+}
+
+.newMessage button {
+  all: unset;
+  background-color: var(--main-color);
+  color: white;
+  border-radius: 15px;
+  padding: 1%;
+  cursor: pointer;
+  margin-left: 5%;
+}
+
+.newMessage button:hover {
+  background-color: rgb(27, 119, 185);
+}
+
+.dH3 {
+  color: var(--main-color);
+  margin-bottom: 2%;
 }

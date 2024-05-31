@@ -1,0 +1,109 @@
+.messagingContainer {
+  display: flex;
+  width: 100%;
+  height: 45vh;
+  margin-top: 5%;
+}
+
+.patientList {
+  margin-top: 1%;
+  width: 40%;
+}
+
+.patientList li {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid var(--third-color);
+}
+
+.patientList li:hover {
+  background-color: var(--third-color);
+}
+
+.selectedPatient {
+  background-color: var(--main-color);
+  color: white;
+}
+
+.messageArea {
+  height: 100%;
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.messages {
+  overflow-y: auto;
+  padding: 10px;
+  margin-bottom: 10px;
+  flex: 1;
+  display: flex;
+  flex-direction: column-reverse; /* Inverse l'ordre des messages */
+  overflow-anchor: none; /* Empêche le défilement automatique vers le haut */
+}
+
+.message {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 70%;
+  word-wrap: break-word;
+  width: fit-content;
+}
+
+.message.doctor {
+  background-color: var(--main-color);
+  color: white;
+  margin-left: auto;
+  text-align: right;
+}
+
+.message.other {
+  background-color: #f1f1f1;
+  text-align: left;
+}
+
+.newMessage {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding: 10px; /* Ajouté pour plus d'espace autour de l'input et du bouton */
+}
+
+.newMessage input {
+  all: unset;
+  background-color: #f1f1f1;
+  border-radius: 15px;
+  width: 70%; /* Augmenté à 70% pour plus d'espace */
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.newMessage input::placeholder {
+  font-size: 0.8rem;
+}
+
+.newMessage button {
+  all: unset;
+  background-color: var(--main-color);
+  color: white;
+  border-radius: 15px;
+  padding: 10px 20px;
+  cursor: pointer;
+  text-align: center; /* Assure que le texte est centré */
+  margin-left: 3%;
+  box-sizing: border-box;
+}
+
+.newMessage button:hover {
+  background-color: rgb(27, 119, 185);
+}
+
+.messagerie {
+  border-left: 1px solid var(--second-color);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}

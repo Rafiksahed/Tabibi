@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import styles from './pPage.module.css'
 import Prochain from './prochain/prochain'
 import Nav from "../components/nav"
-import Message from './message/message'
+import Message from './message/messagePatient'
 import Footer from '../components/footer'
 import Image from 'next/image'
 
@@ -26,8 +26,10 @@ function PatPage() {
               height={360}
             />
       </div>
-      <Message className={styles.message}/>
       </div>
+      <h1 className={styles.msg}>Messagerie</h1>
+      <Message className={styles.message}/>
+      
      <Footer />
     </div>
   )

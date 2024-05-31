@@ -226,18 +226,17 @@ const sendRegistreDataMedecin = async (event: React.FormEvent<HTMLFormElement>) 
         </div>
         <div className='bienvenue' id='bienvenue'>
             <div>
-            <h2>vous avez un medecin!</h2>
-            <p>si vous etes un medecin tu peux inscrir comme un medecin et travaillez avec nous 
-                et gagnez l'argent tous simplement </p>
+            <h2>Vous etes medecin !</h2>
+            <p>si vous etes un medecin vous pouvez vous inscrire ici </p>
 
-                <button onClick={trans}> S'inscrire tant que medecin </button>
+                <button onClick={trans}> S'inscrire en tant que medecin </button>
             </div>
         </div>
         <form className='myloginpage'>
             <center>
         <div className='description'>
-        <h1> Bonjour a tabibi </h1>
-        <p>  le premier platform pour mettre rendez vous online dans l'algerie</p>
+        <h1> Inscription </h1>
+        <p>  Platform de gestion de rendez vous medicaux en ligne</p>
         </div>
     <div>
         <label htmlFor="name"><FaUser /></label>
@@ -272,7 +271,7 @@ const sendRegistreDataMedecin = async (event: React.FormEvent<HTMLFormElement>) 
 }
 
 
-<h5>vous avez deja un compte ? <Link href="/login">connecter</Link></h5>
+<h5>vous avez deja un compte ? <Link href="/login">se connecter</Link></h5>
 
 <button onClick={sendRegistreDataPatient}> S'inscrire </button>
 
@@ -301,8 +300,8 @@ const sendRegistreDataMedecin = async (event: React.FormEvent<HTMLFormElement>) 
         <form className='myloginpage' id='choix'>
             <center>
         <div className='description'>
-        <h1> Bonjour a tabibi </h1>
-        <p>  le premier platform pour mettre rendez vous online dans l'algerie </p>
+        <h1> S'inscrire </h1>
+        <p>   Platform de gestion de rendez vous medicaux en ligne</p>
         </div>
     <div>
         <label htmlFor="name"><FaUser /></label>
@@ -348,19 +347,18 @@ const sendRegistreDataMedecin = async (event: React.FormEvent<HTMLFormElement>) 
 <div>
     <center>
         
-<h1> Bonjour a tabibi </h1>
-        <p>  s'il vous plait choisi votre specialite </p>
+<h1>Specialité</h1>
+        <p>  choisissez votre specialité </p>
         </center>
 </div>
 <div className='specialite'>
 <button className='card' onClick={() => spec('Cardiologue')}>Cardiologue</button>
-    <button className='card' onClick={() => spec('Dermatology')}>Dermatology</button>
+    <button className='card' onClick={() => spec('Dermatology')}>Dermatologue</button>
     <button className='card' onClick={() => spec('Orthopedics')}>Orthopedics </button>
     <button className='card' onClick={() => spec('Gastroenterology')}>Gastroenterology</button>
     <button className='card' onClick={() => spec('Ophthalmology')}>Ophthalmology</button>
     <button className='card' onClick={() => spec('Obstetrics and Gynecology')}>Obstetrics and Gynecology</button>
     <button className='card' onClick={() => spec('Pediatrics')}>Pediatrics</button>
-    <button className='card' onClick={() => spec('Psychiatry')}>Psychiatry</button>
     <button className='card' onClick={() => spec('Oncology')}>Oncology</button>
     <button className='card' onClick={() => spec('Dentiste')}>Dentiste</button>
     <button className='card' onClick={() => spec('generaliste')}>generaliste</button>
@@ -372,10 +370,10 @@ const sendRegistreDataMedecin = async (event: React.FormEvent<HTMLFormElement>) 
 
 <div className='bienvenue' id='bienvenue'>
             <div>
-            <h2>vous avez un patient!</h2>
-            <p>si vous etez un patient tu peux inscrir pour prenez un consultaion online  </p>
+            <h2>vous chercher un rendez vous ?</h2>
+            <p>si vous chercher un rendez vous inscrivez vous maintenant </p>
 
-                <button onClick={trans2}> S'inscrire tant que patient </button>
+                <button onClick={trans2}> S'inscrire</button>
             </div>
         </div>
 

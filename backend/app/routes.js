@@ -15,7 +15,13 @@ const userType = require('./controllers/userTypeController');
 const updateRdv = require('./controllers/updateRdv');
 const services = require('./controllers/services');
 const { getAppointments, bookAppointment } = require('./controllers/rdvServices');
+const messagesController = require('./controllers/messagerie');
 
+const patientMessageController = require('./controllers/patientMessage');
+
+const doctorController = require('./controllers/doctorController');
+
+const patientIDController = require('./controllers/patientIdController');
 
 router.post('/api/login', loginController);
 router.post('/api/logout', logoutController);
@@ -38,6 +44,28 @@ router.get('/api/services' , services);
 
 router.get('/api/rdvServices', getAppointments);
 router.post('/api/rdvServices', bookAppointment);
+
+
+// Routes for messaging
+router.get('/api/doctor/patients', messagesController.getPatientsForDoctor);
+router.get('/api/conversations', messagesController.getConversations);
+router.get('/api/messages', messagesController.getMessages);
+router.post('/api/conversations', messagesController.createConversation);
+router.post('/api/messages', messagesController.sendMessage);
+
+// Routes for messaging
+
+// Routes for messaging for patients
+router.get('/api/patient/doctors', patientMessageController.getDoctorsForPatient);
+router.get('/api/patient/conversations', patientMessageController.getConversationsForPatient);
+router.get('/api/patient/messages', patientMessageController.getMessagesForPatient);
+router.post('/api/patient/messages', patientMessageController.sendMessageForPatient);
+router.post('/api/patient/conversations', patientMessageController.createConversationForPatient);
+
+
+// Route to get doctor user_id
+router.get('/api/doctor/user', doctorController.getDoctorUserId);
+router.get('/api/patient/user', patientIDController.getPatientUserId);
 
 
 module.exports = router;

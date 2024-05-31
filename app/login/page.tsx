@@ -160,7 +160,7 @@ const sendLoginData = async (event) => {
         <div className={styles.bienvenue} id='bienvenue'>
             
             <div>
-            <h2>Bienvenue sur Tabibi,</h2>
+            <h2>Tabibi ,</h2>
             <p>votre solution de prise de rendez-vous médicaux en ligne ! </p>
 
             </div>
@@ -168,8 +168,8 @@ const sendLoginData = async (event) => {
         <form className={styles.myloginpage}>
             <center>
         <div className={styles.description}>
-        <h1> Bonjour a tabibi </h1>
-        <p>  le premier platform pour mettre rendez vous online dans l'algerie</p>
+        <h1> se connecter </h1>
+        <p> à la platform de gestion de rendez vous medicaux en ligne</p>
         </div>
     <div>
     <label htmlFor="email"><MdEmail /></label>
@@ -182,7 +182,6 @@ const sendLoginData = async (event) => {
 {wrong == true &&
 <h5 className={styles.wrong}>L'email ou le mot de passe est incorrect.</h5>
 }
-<h5 className={styles.oublier} onClick={choix}>vous aver oublier votre mot de pass ?</h5>
 <h5>vous aver pas un compte ? <Link href="/inscrire">S'inscrire</Link></h5>
 
 <button onClick={sendLoginData}> Connection </button>

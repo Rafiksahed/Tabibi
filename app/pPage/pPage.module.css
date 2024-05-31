@@ -9,3 +9,13 @@
     display: flex;
     gap: 10vw;
 }
+.message{
+    margin-top: 20%;
+    background-color: black;
+}
+
+.msg{
+    color: var(--main-color);
+    margin-left: 4%;
+    margin-top: 4%;
+}
