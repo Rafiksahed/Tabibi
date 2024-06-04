@@ -2,22 +2,21 @@ import React, { useState, useEffect } from 'react';
 import styles from './List.module.css';
 
 function List() {
-    const [appointments, setAppointments] = useState([]); // État pour stocker les rendez-vous
-    const [selectedItem, setSelectedItem] = useState(0); // Initialisation sur le premier élément par défaut
+    const [appointments, setAppointments] = useState([]);
+    const [selectedItem, setSelectedItem] = useState(0);
 
-    // Fonction pour charger les rendez-vous depuis la base de données
     useEffect(() => {
         const fetchAppointments = async () => {
             try {
                 const response = await fetch('http://localhost:3001/api/appointments', {
-                    credentials: 'include' // Assurez-vous d'inclure les credentials si nécessaire
+                    credentials: 'include'
                 });
                 const data = await response.json();
                 if (data.success && response.ok) {
                     const sortedAppointments = sortAppointmentsByDate(data.acceptedAppointments);
-                    setAppointments(sortedAppointments); // Stocker les données dans l'état
+                    setAppointments(sortedAppointments);
                     if (sortedAppointments.length > 0) {
-                        setSelectedItem(0); // Sélectionner le premier élément par défaut
+                        setSelectedItem(0);
                     }
                 } else {
                     throw new Error('Failed to fetch appointments');
@@ -30,7 +29,6 @@ function List() {
         fetchAppointments();
     }, []);
 
-    // Fonction pour trier les rendez-vous par date, en plaçant ceux dont la date est passée au début de la liste
     const sortAppointmentsByDate = (appointments) => {
         const currentDate = new Date();
         const futureAppointments = [];
@@ -45,15 +43,39 @@ function List() {
         return [...futureAppointments, ...pastAppointments];
     };
 
-    // Gestion des clics sur les éléments
     const handleItemClick = (index) => {
-        setSelectedItem(index); // Met à jour l'état avec l'index de l'élément cliqué
+        setSelectedItem(index);
     };
 
-    // Formater la date et l'heure pour l'affichage
     const formatDate = (dateTime) => {
         const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
         return new Date(dateTime).toLocaleDateString('fr-FR', options);
+    };
+
+    const cancelAppointment = async (appointmentId) => {
+        console.log('Annulation du rendez-vous:', appointmentId); // Vérifiez si ceci s'affiche
+        try {
+            const response = await fetch('http://localhost:3001/api/appointments/cancel', {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ appointment_id: appointmentId }),
+                credentials: 'include' // Assurez-vous d'inclure les credentials
+            });
+
+            const data = await response.json();
+            console.log('Réponse de l\'API:', data); // Ajoutez ceci pour voir la réponse
+            if (data.success) {
+                setAppointments(prevAppointments =>
+                    prevAppointments.filter(appointment => appointment.appointment_id !== appointmentId)
+                );
+            } else {
+                console.error('Error cancelling appointment:', data.message);
+            }
+        } catch (error) {
+            console.error('Error cancelling appointment:', error);
+        }
     };
 
     return (
@@ -71,11 +93,17 @@ function List() {
                             <div className={styles.ctn_list}>
                                 <div className={styles.descr}>
                                     <h3 className={styles.name}>{appointment.patient_name}</h3>
-                                    <p className={styles.details}>Détails supplémentaires ici</p>
+                                    <p className={styles.details}>telephone : {appointment.phone_number}</p>
+                                    <p className={styles.details}>{appointment.email}</p>
                                 </div>
                                 <div className={styles.button}>
                                     <button className={styles.mainB}><b>Envoyer un message</b></button>
-                                    <button className={styles.seconB}><b>Reporter Rendez-vous</b></button>
+                                    <button 
+                                        className={styles.seconB}
+                                        onClick={() => cancelAppointment(appointment.appointment_id)}
+                                    >
+                                        <b>Annuler Rendez-vous</b>
+                                    </button>
                                 </div>
                             </div>
                         </li>
@@ -87,4 +115,3 @@ function List() {
 }
 
 export default List;
-

@@ -1,7 +1,6 @@
 .main{
     margin-top: 5vh;
-
-    height: 40vh;
+    height: fit-content;
 }
 
 .list{

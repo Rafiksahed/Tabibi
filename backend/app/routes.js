@@ -37,6 +37,8 @@ const doctorController = require('./controllers/doctorController');
 
 const patientIDController = require('./controllers/patientIdController');
 
+const cancelAppointment  = require('./controllers/anulerRdv');
+
 router.post('/api/login', loginController);
 router.post('/api/logout', logoutController);
 router.post('/api/registre', registrationController);
@@ -100,6 +102,6 @@ router.get('/api/patientRdv', patientRdv);
 
 router.get('/api/userType', userType);
 
-
+router.delete('/api/appointments/cancel', cancelAppointment);
 
 module.exports = router;
