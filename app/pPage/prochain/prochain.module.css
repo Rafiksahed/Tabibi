@@ -108,6 +108,11 @@
     width: 50%;
 }
 
+.mainB:hover{
+   background-color: rgb(248, 55, 55);
+   color: white;
+}
+
 .seconB {
     border-radius: 10px;
     background-color: #7E91A8;
@@ -119,6 +124,11 @@
     width: 50%;
 }
 
+.seconB:hover{
+    background-color: white;
+    color: var(--main-color);
+    border: 1px solid var(--main-color);
+}
 .button {
     display: flex;
     height: 20%;
@@ -157,3 +167,4 @@
     border-radius: 5px;
     border: none;
 }
+

@@ -218,18 +218,16 @@ function Page() {
         <h3 className={styles.pFilter}>Filtré par specialité : </h3>
         <select name="filter" id="filter" onChange={handleFilterChange} value={selectedOption} className={styles.selectFilter}>
           <option value="all">all</option>
-          <option value="cardiologue">Cardiologue</option>
-          <option value="Dermatology">Dermatology</option>
-          <option value="Orthopedics">Orthopedics</option>
-          <option value="Gastroenterology">Gastroenterology</option>
-          <option value="Ophthalmology">Ophthalmology</option>
-          <option value="Obstetrics">Obstetrics</option>
-          <option value="Pediatrics">Pediatrics</option>
-          <option value="Psychiatry">Psychiatry</option>
-          <option value="Oncology">Oncology</option>
-          <option value="Dentiste">Dentiste</option>
-          <option value="generaliste">generaliste</option>
+          <option value="Cardiologue">Cardiologue</option>
+          <option value="Dermatologue">Dermatologue</option>
+          <option value="Orthopedic">Orthopedic</option>
+          <option value="Gastrologue">Gastroenterologue</option>
+          <option value="Ophthalmologue">Ophthalmologue</option>
+          <option value="Pediatre">Pediatre</option>
           <option value="Psychiatre">Psychiatre</option>
+          <option value="Oncologue">Oncologue</option>
+          <option value="Dentiste">Dentiste</option>
+          <option value="Generaliste">Generaliste</option>
         </select>
         <HiChevronUpDown />
         </div>

@@ -392,15 +392,15 @@ const sendRegistreDataMedecin = async (event: React.FormEvent<HTMLFormElement>) 
 </div>
 <div className='specialite'>
 <button className='card' onClick={() => spec('Cardiologue')}>Cardiologue</button>
-    <button className='card' onClick={() => spec('Dermatology')}>Dermatologue</button>
-    <button className='card' onClick={() => spec('Orthopedics')}>Orthopedics </button>
-    <button className='card' onClick={() => spec('Gastroenterology')}>Gastroenterology</button>
-    <button className='card' onClick={() => spec('Ophthalmology')}>Ophthalmology</button>
-    <button className='card' onClick={() => spec('Obstetrics and Gynecology')}>Obstetrics and Gynecology</button>
-    <button className='card' onClick={() => spec('Pediatrics')}>Pediatrics</button>
-    <button className='card' onClick={() => spec('Oncology')}>Oncology</button>
+    <button className='card' onClick={() => spec('Dermatologue')}>Dermatologue</button>
+    <button className='card' onClick={() => spec('Orthopedique')}>Orthopedique </button>
+    <button className='card' onClick={() => spec('Gastrologue')}>Gastrologue</button>
+    <button className='card' onClick={() => spec('Ophthalmologue')}>Ophthalmologue</button>
+    <button className='card' onClick={() => spec('Gynecologue')}>Gynecologue</button>
+    <button className='card' onClick={() => spec('Pediatre')}>Pediatre</button>
+    <button className='card' onClick={() => spec('Oncologue')}>Oncologue</button>
     <button className='card' onClick={() => spec('Dentiste')}>Dentiste</button>
-    <button className='card' onClick={() => spec('generaliste')}>generaliste</button>
+    <button className='card' onClick={() => spec('Generaliste')}>Generaliste</button>
     <button className='card' onClick={() => spec('Psychiatre')}>Psychiatre</button>
     <button className='connect' onClick={sendRegistreDataMedecin}> S'inscrire </button>
     <button className='return' onClick={nonchoix}><IoMdReturnLeft /></button>

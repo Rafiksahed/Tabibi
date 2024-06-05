@@ -109,7 +109,29 @@ function PatientList() {
             console.error('Erreur lors de l\'enregistrement de la nouvelle date/heure :', error);
         }
     };
-
+    
+    const handleDelete = async (appointmentId) => {
+        // Appel API pour annuler le rendez-vous
+        try {
+            const response = await fetch('http://localhost:3001/api/appointments/cancel', {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ appointment_id: appointmentId }),
+                credentials: 'include'
+            });
+            if (response.ok) {
+                const updatedAppointments = appointments.filter(app => app.appointment_id !== appointmentId);
+                setAppointments(updatedAppointments);
+            } else {
+                throw new Error('Échec de l\'annulation du rendez-vous');
+            }
+        } catch (error) {
+            console.error('Erreur lors de l\'annulation du rendez-vous :', error);
+        }
+    };
+    
     return (
         <div className={styles.dash}>
             <h1 className={styles.h1}>Mes prochain Rendez-vous</h1>
@@ -142,7 +164,7 @@ function PatientList() {
                                         {editing === appointment.appointment_id ? (
                                             <button className={styles.mainB} onClick={() => handleCancel()}><b>Anuler</b></button>
                                         ) : (
-                                            <button className={styles.mainB}><b>Envoyer un message</b></button>
+                                            <button className={styles.mainB} onClick={() => handleDelete(appointment.appointment_id)}><b>Annuler Rendez-vous</b></button>
                                             
                                         )}
                                         

@@ -65,8 +65,8 @@ export default function Home() {
            <Image 
            src="/img/clr.png"
            alt='docteur image'
-           height={350}
-           width={400}
+           height={400}
+           width={450}
            />
          </div>
          <div className={styles.text}>
