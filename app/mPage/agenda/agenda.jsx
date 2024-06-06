@@ -104,6 +104,7 @@ function Agenda() {
           ))}
         </tbody>
       </table>
+      {/*
       <div className={styles.propre}>
           <h1 className={styles.h2}>Ajouter mes propre Rendez-vous</h1>
           <form  className={styles.form}>
@@ -121,6 +122,7 @@ function Agenda() {
             <button type="submit" className={styles.ajout}>Ajouter</button>
           </form>
       </div>
+        */}
     </div>
   );
 }

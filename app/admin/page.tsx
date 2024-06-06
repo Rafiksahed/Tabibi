@@ -145,7 +145,7 @@ function Page() {
   }, [dataAppointement]);
 
 
-  const block = async (userId: number) => {
+ /* const block = async (userId: number) => {
     console.log(`Blocking user with ID: ${userId}`);
     const user_id = userId;
     location.reload();
@@ -156,6 +156,7 @@ function Page() {
         headers: {
           'Content-Type': 'application/json'
         },
+        credentials: 'include',
         body: JSON.stringify({
           user_id: user_id
         })
@@ -189,6 +190,7 @@ function Page() {
         headers: {
           'Content-Type': 'application/json'
         },
+        credentials: 'include',
         body: JSON.stringify({
           user_id: user_id
         })
@@ -209,8 +211,54 @@ function Page() {
       // Optionally, provide feedback to the user about the error
     }
   };
+  */
   
-
+  const block = async (userId: number) => {
+    try {
+      const response = await fetch('http://localhost:3001/api/deleteUser', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify({ user_id: userId })
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to block user');
+      }
+  
+      const responseData = await response.json();
+      console.log('User blocked successfully:', responseData);
+      setData(data.filter(user => user.user_id !== userId)); // Update state
+    } catch (error) {
+      console.error('Error blocking user:', error);
+    }
+  };
+  
+  const accepted = async (userId: number) => {
+    try {
+      const response = await fetch('http://localhost:3001/api/adminAcceptMedecin', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify({ user_id: userId })
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to accept doctor');
+      }
+  
+      const responseData = await response.json();
+      console.log('Doctor accepted successfully:', responseData);
+      setDataMedecinStatus(dataMedecinStatus.map(doc => doc.user_id === userId ? { ...doc, status: 'accepted' } : doc)); // Update state
+    } catch (error) {
+      console.error('Error accepting doctor:', error);
+    }
+  };
+  
   return (
     <div>
       <div className={styles.sideBar}>
